@@ -9,15 +9,15 @@ namespace TCJ
         public float horizontal;
         public float vertical;
         public float moveAmount;
-        public float mouseX;
-        public float mouseY;
+        //public float mouseX;
+        //public float mouseY;
 
         public bool b_input;
         public bool rollFlag;
         PlayerControls inputActions;
 
         Vector2 movementInput;
-        Vector2 cameraInput;
+        //Vector2 cameraInput;
 
         public void OnEnable()
         {
@@ -25,7 +25,7 @@ namespace TCJ
             {
                 inputActions = new PlayerControls();
                 inputActions.PlayerMovement.PlayerMovement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
-                inputActions.PlayerMovement.CameraMovement.performed += i => cameraInput = i.ReadValue<Vector2>();
+                //inputActions.PlayerMovement.CameraMovement.performed += i => cameraInput = i.ReadValue<Vector2>();
             }
 
             inputActions.Enable();
@@ -44,8 +44,8 @@ namespace TCJ
             horizontal = movementInput.x;
             vertical = movementInput.y;
             moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
-            mouseX = cameraInput.x;
-            mouseY = cameraInput.y;
+            //mouseX = cameraInput.x;
+            //mouseY = cameraInput.y;
         }
 
         private void HandleRollInput(float delta){
