@@ -48,8 +48,9 @@ public class PlayerLocomotion : MonoBehaviour
     private void HandleRotation(float delta){
         Vector3 targetDir = Vector3.zero;
         float moveOvverride = inputHandler.moveAmount;
+        Vector3 camforward = Quaternion.Euler(0,-90,0) * cameraObject.right;
 
-        targetDir = cameraObject.forward * inputHandler.vertical;
+        targetDir = camforward * inputHandler.vertical;
         targetDir += cameraObject.right * inputHandler.horizontal;
 
         targetDir.Normalize();
@@ -69,7 +70,8 @@ public class PlayerLocomotion : MonoBehaviour
     #endregion
 
     private void HandleMovement(float delta){
-        moveDirection = cameraObject.forward * inputHandler.vertical;
+        Vector3 camforward = Quaternion.Euler(0,-90,0) * cameraObject.right;
+        moveDirection = camforward * inputHandler.vertical;
         moveDirection += cameraObject.right * inputHandler.horizontal;
         moveDirection.Normalize();
 
