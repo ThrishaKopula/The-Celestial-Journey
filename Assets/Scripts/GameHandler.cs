@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     public GameObject character;
+    public CameraMovement cameraMovement;
 
     //A list of prefabs of the characters. This is possible since we will be keeping the information that
     //has to be persistent in this script.
@@ -75,33 +76,36 @@ public class GameHandler : MonoBehaviour
     //Character swapping functions
     public void PreviousCharacter(){
         //decrement the whichCharacter, with wraparound
+        int temp = whichCharacter;
         if (whichCharacter == 0) {
             whichCharacter = CharacterList.Count - 1;
         } else {
             whichCharacter -= 1;
         }
+        if (temp == whichCharacter) return; // swapping to the same character
+        Swap(whichCharacter);
     }
     public void NextCharacter(){
         //increment the whichCharacter, with wraparound
+        int temp = whichCharacter;
         if (whichCharacter == CharacterList.Count - 1) {
             whichCharacter = 0;
         } else {
             whichCharacter += 1;
         }
+        if (temp == whichCharacter) return; // swapping to the same character
+        Swap(whichCharacter);
     }
 
     public void Swap(int index) {
-        if (index < 0 || index > CharacterList.Count - 1) return;
+        if (index < 0 || index > CharacterList.Count - 1) return; // bounds check
+        if (whichCharacter == index) return; // swapping to the same character
         whichCharacter = index;
         //kep track of where the player currently is
         Vector3 position = character.transform.position;
         if (character != null) Destroy(character);
         character = Instantiate(CharacterList[whichCharacter]);
+        cameraMovement.PlayerTransform = character.transform;
         //character.GetComponent<ThirdPersonMovement>().enabled = true;
-        for (int i = 0; i < CharacterList.Count; i++) {
-            if (CharacterList[i] != character) {
-                //CharacterList[i].GetComponent<ThirdPersonMovement>().enabled = false;
-            }
-        }
     }
 }

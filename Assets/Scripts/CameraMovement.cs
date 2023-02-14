@@ -23,8 +23,11 @@ public class CameraMovement : MonoBehaviour
     {
         //move the camera to its offset behind the character
         Camera.transform.localPosition = cameraOffset;
-        //move root of camera to player position
-        this.transform.position = PlayerTransform.position;
+        //move root of camera to player position if there is one
+        if (PlayerTransform != null){
+            this.transform.position = PlayerTransform.position;
+        }
+        
 
         //rotate camera parent with mouse
         mouseX += Input.GetAxis("Mouse X") * MouseSensitivityX;
@@ -33,4 +36,5 @@ public class CameraMovement : MonoBehaviour
         transform.localRotation = Quaternion.Euler(-mouseY, mouseX , 0);
         
     }
+    
 }
