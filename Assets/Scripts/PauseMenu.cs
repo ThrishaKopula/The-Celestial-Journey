@@ -34,7 +34,6 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         SlideIn();
-        //transform.LeanMoveLocal(new Vector2(-2754, 300), 1);
         Time.timeScale = 0f;
         gameIsPaused = true;
     }
