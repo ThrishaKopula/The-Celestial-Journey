@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: be97f36f8b50c384e9ff79d60c4907ad
+guid: aef20c81957977140a8d7480944fa096
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,8 +9,9 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Trajan Pro
-  fallbackFontReferences: []
+  - Asul
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 888e549f2b2647142803f13d17f43ae9, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
