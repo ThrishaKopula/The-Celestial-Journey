@@ -24,16 +24,33 @@ public class PauseMenu : MonoBehaviour
 
     void ResumeGame()
     {
-        pauseMenuUI.SetActive(false);
         Time.timeScale = 1.0f;
+        SlideOut();
+        //Time.timeScale = 1.0f;
         gameIsPaused = false;
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 1.0f;
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
         pauseMenuUI.SetActive(true);
-        pauseMenuUI.transform.LeanMoveLocal(new Vector2(2754, 0), 1);
-        Time.timeScale = 0f;
+        SlideIn();
+        //transform.LeanMoveLocal(new Vector2(-2754, 300), 1);
+        //Time.timeScale = 0f;
         gameIsPaused = true;
     }
+
+    public void SlideIn()
+    {
+        pauseMenuUI.transform.LeanMoveLocalX(1377, 1).setEaseOutQuint();
+    }
+
+
+
+    public void SlideOut()
+    {
+        pauseMenuUI.transform.LeanMoveLocalX(2470, 1).setEaseOutQuint();
+    }
+ 
 }
