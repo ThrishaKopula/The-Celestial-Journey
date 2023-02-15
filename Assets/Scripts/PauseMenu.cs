@@ -24,12 +24,10 @@ public class PauseMenu : MonoBehaviour
 
     void ResumeGame()
     {
-        Time.timeScale = 1.0f;
         SlideOut();
-        //Time.timeScale = 1.0f;
+        Time.timeScale = 1.0f;
         gameIsPaused = false;
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 1.0f;
     }
 
     public void PauseGame()
@@ -37,20 +35,18 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         SlideIn();
         //transform.LeanMoveLocal(new Vector2(-2754, 300), 1);
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
         gameIsPaused = true;
     }
 
     public void SlideIn()
     {
-        pauseMenuUI.transform.LeanMoveLocalX(1377, 1).setEaseOutQuint();
+        pauseMenuUI.transform.LeanMoveLocalX(1377, 1).setEaseOutQuint().setIgnoreTimeScale(true);
     }
-
-
 
     public void SlideOut()
     {
-        pauseMenuUI.transform.LeanMoveLocalX(2470, 1).setEaseOutQuint();
+        pauseMenuUI.transform.LeanMoveLocalX(2470, 1).setEaseOutQuint().setIgnoreTimeScale(true);
     }
  
 }
