@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Dodge",
+                    "type": "Button",
+                    "id": "d897f222-f154-4b64-96ce-def137034c23",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "SlowTap",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -90,26 +99,28 @@
                     "action": "CameraMovement",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7aaa06ea-64bb-4487-93f4-f072ab00e042",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "PlayerActions",
-            "id": "520c81a5-3a24-46f2-9a8c-257bc4011a14",
+            "name": "Combat",
+            "id": "9dac1eeb-1c25-4811-a709-d19cdac95b85",
             "actions": [
                 {
-                    "name": "Dodge",
+                    "name": "New action",
                     "type": "Button",
-                    "id": "5ce6c076-a961-4383-990b-00daec8c2eb8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "SlowTap",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "9bb9d40a-94e3-4f1f-bf80-1bf373cdb559",
+                    "id": "884a1bcc-1f6e-45ba-b048-09b959d7f696",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -119,23 +130,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "4a57a391-a243-465a-ad3f-2e7d804cb9d4",
-                    "path": "<Keyboard>/leftShift",
+                    "id": "8251818f-590d-45d2-b701-f9cc955c5b21",
+                    "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Dodge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8a428b0b-26cc-4c67-88e3-0969af4287aa",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
