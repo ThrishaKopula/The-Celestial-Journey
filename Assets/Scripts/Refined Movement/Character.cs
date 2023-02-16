@@ -1,0 +1,81 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+//Refined Movement: Contains all information for the player so that we can access 
+public class Character : MonoBehaviour
+{
+    [Header("Controls")]
+    public float playerSpeed = 5.0f;
+    public float gravityMultiplier = 2;
+    public float rotationSpeed = 5f;
+
+    [Header("Animation Smoother")]
+    [Range(0,1)]
+    public float speedDampTime = 0.1f;
+    [Range(0,1)]
+    public float velocityDampTime = 0.9f;
+    [Range(0,1)]
+    public float rotationDampTime = 0.2f;
+    [Range(0,1)]
+    public float airControl = 0.5f;
+
+    public StateMachine movementSM;
+    public IdleState idle;
+
+    //Gravity for the character
+    [HideInInspector]
+    public float gravityValue = -9.81f;
+
+    //Default Character's Collider Height
+    [HideInInspector]
+    public float normalColliderHeight;
+
+    //Character Input Controller
+    [HideInInspector]
+    public CharacterController controller;
+
+    [HideInInspector]
+    public PlayerInput playerInput;
+
+    //Character Animator
+    [HideInInspector]
+    public Animator animator;
+
+    //Character Animator
+    [HideInInspector]
+    public Vector3 playerVelocity;
+
+    //Character Camera
+    [HideInInspector]
+    public Transform cameraTransform;
+    
+    private void Start(){
+        controller = GetComponent<CharacterController>();   
+        animator = GetComponent<Animator>();
+        playerInput = GetComponent<PlayerInput>();
+        cameraTransform = Camera.main.transform;
+       
+        
+        movementSM = new StateMachine();
+        idle = new IdleState(this,movementSM);
+       // dodge = new DodgeState(this,movementSM);
+        
+        movementSM.Initialize(idle);
+
+
+        normalColliderHeight = controller.height;
+
+    }
+
+    private void Update(){
+        movementSM.currentState.HandleInput();
+        movementSM.currentState.LogicUpdate();
+    }
+
+    private void FixedUpdate(){
+        movementSM.currentState.PhysicsUpdate();
+    }
+}
+
