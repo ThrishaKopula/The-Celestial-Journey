@@ -41,8 +41,9 @@ public class PauseMenu : MonoBehaviour
 
     public void SlideIn()
     {
-        pauseMenuUI.transform.LeanMoveLocalX(1143, 1).setEaseOutQuint().setIgnoreTimeScale(true);
+        pauseMenuUI.transform.LeanMoveLocalX(1333, 1).setEaseOutQuint().setIgnoreTimeScale(true);
     }
+    //1143
 
     public void SlideOut()
     {
