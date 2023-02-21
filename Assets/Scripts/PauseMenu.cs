@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    void ResumeGame()
+    public void ResumeGame()
     {
         SlideOut();
         Time.timeScale = 1.0f;
@@ -47,5 +48,11 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.transform.LeanMoveLocalX(2709, 1).setEaseOutQuint().setIgnoreTimeScale(true);
     }
- 
+
+    public void LoadMenu()
+    {
+        ResumeGame();
+        SceneManager.LoadScene(0);
+    }
+
 }
