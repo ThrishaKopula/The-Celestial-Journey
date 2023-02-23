@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 45578978}
   - component: {fileID: 45578977}
   - component: {fileID: 45578976}
+  - component: {fileID: 45578982}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -158,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   movementSpeed: 1
+  damage: 5
 --- !u!54 &45578977
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -252,6 +254,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &45578982
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45578975}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1, y: 1.1, z: 1.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &64347346
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +494,7 @@ MonoBehaviour:
   character: {fileID: 6516627716188827657}
   cameraMovement: {fileID: 360846140}
   CharacterList: []
-  whichCharacter: 0
+  roomList: []
 --- !u!4 &88544961
 Transform:
   m_ObjectHideFlags: 0

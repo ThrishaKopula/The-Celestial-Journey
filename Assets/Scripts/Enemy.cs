@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public float health = 10;
     public float movementSpeed = 10;
+
+    public float damage = 5;
     Rigidbody rb;
 
     GameHandler gameHandler;
@@ -35,11 +37,23 @@ public class Enemy : MonoBehaviour
         
     }
 
-    public bool damage(float damage){
+    public bool Damage(float damage){
         health -= damage;
         if (health <= 0 ) {
             return true;
         }
         else return false;
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        Character character = other.GetComponent<Character>();
+        if (character != null){
+            //do damage
+            gameHandler.Damage(damage);
+            //do a kickback force to get them out of the collider, but could probably use a delay on another hit
+            Vector3 direction = this.transform.position - character.gameObject.transform.position;
+            direction.y = 0;
+            this.GetComponent<Rigidbody>().AddForce(direction.normalized * movementSpeed * 2 +  new Vector3(0,1 * movementSpeed * 2,0), ForceMode.Impulse);
+        }
     }
 }
