@@ -24,135 +24,23 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
-            ""name"": ""Player Movement"",
-            ""id"": ""db0275e8-9a44-4864-9577-34111cceea53"",
+            ""name"": ""New action map"",
+            ""id"": ""7190d578-e558-46c7-8fc5-233f768d1461"",
             ""actions"": [
                 {
-                    ""name"": ""PlayerMovement"",
+                    ""name"": ""New action"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""bf01b780-1128-4e6a-ba93-d18ce39cadc6"",
+                    ""id"": ""4e03bf85-dd14-41c3-b992-3e3f03de371e"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CameraMovement"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""34b80195-6760-4e3a-84d1-5394f39e3019"",
-                    ""expectedControlType"": ""Delta"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Dodge"",
-                    ""type"": ""Button"",
-                    ""id"": ""d897f222-f154-4b64-96ce-def137034c23"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""SlowTap"",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""837c0aeb-82e3-4c65-9f0b-56246ce6c90b"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlayerMovement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""a0b554b9-1d28-45bf-a090-cbfb0ed22d34"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlayerMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""cdf46a00-5b2b-456c-853b-2f270b793eca"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlayerMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""1b243cf6-db60-4620-8885-09dbac65ce87"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlayerMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""e2b5bd94-da2a-4425-aa7d-fbce99cb60e4"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlayerMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""af7399dc-09e0-450c-aea3-0a96db9896a2"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CameraMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7aaa06ea-64bb-4487-93f4-f072ab00e042"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dodge"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Combat"",
-            ""id"": ""9dac1eeb-1c25-4811-a709-d19cdac95b85"",
-            ""actions"": [
-                {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
-                    ""id"": ""884a1bcc-1f6e-45ba-b048-09b959d7f696"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""8251818f-590d-45d2-b701-f9cc955c5b21"",
+                    ""id"": ""e97d1263-24ed-4d60-ace1-acdba7c2550e"",
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
@@ -166,14 +54,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // Player Movement
-        m_PlayerMovement = asset.FindActionMap("Player Movement", throwIfNotFound: true);
-        m_PlayerMovement_PlayerMovement = m_PlayerMovement.FindAction("PlayerMovement", throwIfNotFound: true);
-        m_PlayerMovement_CameraMovement = m_PlayerMovement.FindAction("CameraMovement", throwIfNotFound: true);
-        m_PlayerMovement_Dodge = m_PlayerMovement.FindAction("Dodge", throwIfNotFound: true);
-        // Combat
-        m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
-        m_Combat_Newaction = m_Combat.FindAction("New action", throwIfNotFound: true);
+        // New action map
+        m_Newactionmap = asset.FindActionMap("New action map", throwIfNotFound: true);
+        m_Newactionmap_Newaction = m_Newactionmap.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -230,78 +113,29 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Player Movement
-    private readonly InputActionMap m_PlayerMovement;
-    private IPlayerMovementActions m_PlayerMovementActionsCallbackInterface;
-    private readonly InputAction m_PlayerMovement_PlayerMovement;
-    private readonly InputAction m_PlayerMovement_CameraMovement;
-    private readonly InputAction m_PlayerMovement_Dodge;
-    public struct PlayerMovementActions
+    // New action map
+    private readonly InputActionMap m_Newactionmap;
+    private INewactionmapActions m_NewactionmapActionsCallbackInterface;
+    private readonly InputAction m_Newactionmap_Newaction;
+    public struct NewactionmapActions
     {
         private @PlayerControls m_Wrapper;
-        public PlayerMovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PlayerMovement => m_Wrapper.m_PlayerMovement_PlayerMovement;
-        public InputAction @CameraMovement => m_Wrapper.m_PlayerMovement_CameraMovement;
-        public InputAction @Dodge => m_Wrapper.m_PlayerMovement_Dodge;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
+        public NewactionmapActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_Newactionmap_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_Newactionmap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerMovementActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerMovementActions instance)
+        public static implicit operator InputActionMap(NewactionmapActions set) { return set.Get(); }
+        public void SetCallbacks(INewactionmapActions instance)
         {
-            if (m_Wrapper.m_PlayerMovementActionsCallbackInterface != null)
+            if (m_Wrapper.m_NewactionmapActionsCallbackInterface != null)
             {
-                @PlayerMovement.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPlayerMovement;
-                @PlayerMovement.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPlayerMovement;
-                @PlayerMovement.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnPlayerMovement;
-                @CameraMovement.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraMovement;
-                @CameraMovement.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraMovement;
-                @CameraMovement.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCameraMovement;
-                @Dodge.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnDodge;
-                @Dodge.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnDodge;
-                @Dodge.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnDodge;
+                @Newaction.started -= m_Wrapper.m_NewactionmapActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_NewactionmapActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_NewactionmapActionsCallbackInterface.OnNewaction;
             }
-            m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @PlayerMovement.started += instance.OnPlayerMovement;
-                @PlayerMovement.performed += instance.OnPlayerMovement;
-                @PlayerMovement.canceled += instance.OnPlayerMovement;
-                @CameraMovement.started += instance.OnCameraMovement;
-                @CameraMovement.performed += instance.OnCameraMovement;
-                @CameraMovement.canceled += instance.OnCameraMovement;
-                @Dodge.started += instance.OnDodge;
-                @Dodge.performed += instance.OnDodge;
-                @Dodge.canceled += instance.OnDodge;
-            }
-        }
-    }
-    public PlayerMovementActions @PlayerMovement => new PlayerMovementActions(this);
-
-    // Combat
-    private readonly InputActionMap m_Combat;
-    private ICombatActions m_CombatActionsCallbackInterface;
-    private readonly InputAction m_Combat_Newaction;
-    public struct CombatActions
-    {
-        private @PlayerControls m_Wrapper;
-        public CombatActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_Combat_Newaction;
-        public InputActionMap Get() { return m_Wrapper.m_Combat; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CombatActions set) { return set.Get(); }
-        public void SetCallbacks(ICombatActions instance)
-        {
-            if (m_Wrapper.m_CombatActionsCallbackInterface != null)
-            {
-                @Newaction.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnNewaction;
-            }
-            m_Wrapper.m_CombatActionsCallbackInterface = instance;
+            m_Wrapper.m_NewactionmapActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Newaction.started += instance.OnNewaction;
@@ -310,14 +144,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             }
         }
     }
-    public CombatActions @Combat => new CombatActions(this);
-    public interface IPlayerMovementActions
-    {
-        void OnPlayerMovement(InputAction.CallbackContext context);
-        void OnCameraMovement(InputAction.CallbackContext context);
-        void OnDodge(InputAction.CallbackContext context);
-    }
-    public interface ICombatActions
+    public NewactionmapActions @Newactionmap => new NewactionmapActions(this);
+    public interface INewactionmapActions
     {
         void OnNewaction(InputAction.CallbackContext context);
     }
