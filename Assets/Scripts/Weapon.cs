@@ -9,10 +9,12 @@ public class Weapon : MonoBehaviour
 
     public float damage = 10; // we could add damage typess and attribute stuff if we want
 
-    private void OnCollisionEnter(Collision other) {
+    private void OnTriggerEnter(Collider other) {
         Enemy enemy = other.gameObject.GetComponent<Enemy>();
         if (enemy != null){
-            enemy.Damage(damage);
+            if (enemy.Damage(damage)){
+                Destroy(enemy.gameObject);
+            }
         }
     }
 }

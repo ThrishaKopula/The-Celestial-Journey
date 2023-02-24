@@ -71,9 +71,9 @@ public class GameHandler : MonoBehaviour
         
         CharacterHealths.TryAdd(character.GetComponent<Character>().name, 10);
         CharacterHealths[character.GetComponent<Character>().name] -= damage;
-        Debug.Log("Enemy did damage!");
+        //Debug.Log("Enemy did damage!");
         if (CharacterHealths[character.GetComponent<Character>().name] < 0){
-            Debug.Log("Character died!");
+            //Debug.Log("Character died!");
             //character died / incapacitated
         }
     }
