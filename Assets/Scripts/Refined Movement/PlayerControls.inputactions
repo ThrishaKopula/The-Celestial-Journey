@@ -2,140 +2,132 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "Player Movement",
-            "id": "db0275e8-9a44-4864-9577-34111cceea53",
+            "name": "Player Controls",
+            "id": "7190d578-e558-46c7-8fc5-233f768d1461",
             "actions": [
                 {
-                    "name": "PlayerMovement",
+                    "name": "Player Movement",
                     "type": "PassThrough",
-                    "id": "bf01b780-1128-4e6a-ba93-d18ce39cadc6",
+                    "id": "4e03bf85-dd14-41c3-b992-3e3f03de371e",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CameraMovement",
-                    "type": "PassThrough",
-                    "id": "34b80195-6760-4e3a-84d1-5394f39e3019",
-                    "expectedControlType": "Delta",
+                    "name": "LightAttack",
+                    "type": "Button",
+                    "id": "e8ea8dfc-7a3d-418c-ac37-a888ef31a971",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dodge",
+                    "name": "HeavyAttack",
                     "type": "Button",
-                    "id": "d897f222-f154-4b64-96ce-def137034c23",
+                    "id": "0c7f82b7-19d4-423c-aad5-e3aff33fefaf",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "SlowTap",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Draw Weapon",
+                    "type": "Button",
+                    "id": "8308f7c8-01ed-408f-8921-a0e6cbac8b6a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "WASD",
-                    "id": "837c0aeb-82e3-4c65-9f0b-56246ce6c90b",
+                    "id": "97fc568b-a8bc-4ee5-bec0-f5f30c50cc10",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PlayerMovement",
+                    "action": "Player Movement",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "up",
-                    "id": "a0b554b9-1d28-45bf-a090-cbfb0ed22d34",
+                    "id": "baf2729b-8677-4058-8a32-f9a1f005b86c",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PlayerMovement",
+                    "action": "Player Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
-                    "id": "cdf46a00-5b2b-456c-853b-2f270b793eca",
+                    "id": "1b4dfc24-e48a-4c6e-8a52-6b16a52ca15f",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PlayerMovement",
+                    "action": "Player Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
-                    "id": "1b243cf6-db60-4620-8885-09dbac65ce87",
+                    "id": "31103c3d-7bf5-4bba-afc0-ff3ed3f82ef9",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PlayerMovement",
+                    "action": "Player Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
-                    "id": "e2b5bd94-da2a-4425-aa7d-fbce99cb60e4",
+                    "id": "24e88f2a-e4aa-4158-9b0c-19f16a04296f",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PlayerMovement",
+                    "action": "Player Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "af7399dc-09e0-450c-aea3-0a96db9896a2",
-                    "path": "<Mouse>/delta",
+                    "id": "a5e10ff3-0069-4bc9-8e6b-3358f1a8e1ce",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CameraMovement",
+                    "action": "LightAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "7aaa06ea-64bb-4487-93f4-f072ab00e042",
-                    "path": "<Keyboard>/leftShift",
+                    "id": "a7cb9015-8b4c-46de-8e41-f676ae52df69",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Dodge",
+                    "action": "HeavyAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Combat",
-            "id": "9dac1eeb-1c25-4811-a709-d19cdac95b85",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "884a1bcc-1f6e-45ba-b048-09b959d7f696",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "8251818f-590d-45d2-b701-f9cc955c5b21",
-                    "path": "",
+                    "id": "7c1dcd40-921c-4c3d-9e7f-073502facd90",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Draw Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
