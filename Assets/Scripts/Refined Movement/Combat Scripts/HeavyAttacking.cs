@@ -7,7 +7,6 @@ public class HeavyAttackState : States
     float timePassed;
     float clipLength;
     float clipSpeed;
-    bool lightAttack;
     bool heavyAttack;
     public HeavyAttackState(Character _character, StateMachine _stateMachine) : base(_character, _stateMachine)
     {
@@ -18,8 +17,7 @@ public class HeavyAttackState : States
     public override void Enter()
     {
         base.Enter();
- 
-        lightAttack = false;
+        heavyAttack = false;
         character.animator.applyRootMotion = true;
         timePassed = 0f;
         character.animator.SetTrigger("HeavyAttack");
