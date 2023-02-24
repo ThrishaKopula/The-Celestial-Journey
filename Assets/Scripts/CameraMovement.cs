@@ -27,14 +27,14 @@ public class CameraMovement : MonoBehaviour
         if (PlayerTransform != null){
             this.transform.position = PlayerTransform.position;
         }
-        
 
-        //rotate camera parent with mouse
-        mouseX += Input.GetAxis("Mouse X") * MouseSensitivityX;
-        mouseY += Input.GetAxis("Mouse Y") * MouseSensitivityY;
-        mouseY = Mathf.Clamp(mouseY, -camMaxAngle, -camMinAngle);
-        transform.localRotation = Quaternion.Euler(-mouseY, mouseX , 0);
-        
-    }
-    
+        if(TextAnim.isDialogue == false && PauseMenu.gameIsPaused == false)
+        {
+            //rotate camera parent with mouse
+            mouseX += Input.GetAxis("Mouse X") * MouseSensitivityX;
+            mouseY += Input.GetAxis("Mouse Y") * MouseSensitivityY;
+            mouseY = Mathf.Clamp(mouseY, -camMaxAngle, -camMinAngle);
+            transform.localRotation = Quaternion.Euler(-mouseY, mouseX, 0);
+        }
+    } 
 }

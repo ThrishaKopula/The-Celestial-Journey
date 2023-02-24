@@ -19,11 +19,13 @@ public class TextAnim : MonoBehaviour
     public GameObject pauseMenu;
     public bool isStarVisible = false;
     public bool isVenusVisible = false;
+    public static bool isDialogue;
     public GameObject backOpacityScreen;
     public GameObject dialogueScreen;
     int i = 0;
     void Start()
     {
+        isDialogue = true;
         pauseMenu.SetActive(false);
         Time.timeScale = 0f;
         dialogBox.transform.LeanMoveLocalY(0, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
@@ -36,10 +38,14 @@ public class TextAnim : MonoBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if(PauseMenu.gameIsPaused == false)
         {
-            EndCheck();
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            {
+                EndCheck();
+            }
         }
+       
     }
 
     public void EndCheck()
@@ -116,6 +122,7 @@ public class TextAnim : MonoBehaviour
         backOpacityScreen.SetActive(false);
         dialogBox.transform.LeanMoveLocalY(-1200, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
         pauseMenu.SetActive(true);
+        isDialogue = false;
         if (isStarVisible)
         {
             SlideOutLeft(starAvatar);
