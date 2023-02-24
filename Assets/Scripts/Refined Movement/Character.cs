@@ -23,6 +23,11 @@ public class Character : MonoBehaviour
 
     public StateMachine movementSM;
     public IdleState idle;
+    public CombatState combatting;
+
+    public LightAttackState lightAttacking;
+
+    public HeavyAttackState heavyAttacking;
 
     //Gravity for the character
     [HideInInspector]
@@ -52,28 +57,41 @@ public class Character : MonoBehaviour
     public Transform cameraTransform;
     
     private void Start(){
+        //Initialize the following:
+        // - Controller : The Player CharacterController Object
+        // - Animator: The Player Animator
+        // - PlayerInput: The Player's InputSystem 
+        // - Cameratransform: The Camera's position. 
         controller = GetComponent<CharacterController>();   
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
         cameraTransform = Camera.main.transform;
        
-        
+        //Instantiate New States for the Character
+        //Idle : Base Movement
+        //Combat : Combat Movement
+        //Attacking: While the player is attacking
         movementSM = new StateMachine();
         idle = new IdleState(this,movementSM);
-       // dodge = new DodgeState(this,movementSM);
+        combatting = new CombatState(this,movementSM);
+        lightAttacking = new LightAttackState(this,movementSM);
+        heavyAttacking = new HeavyAttackState(this,movementSM);
+        // dodge = new DodgeState(this,movementSM);
         
         movementSM.Initialize(idle);
 
-
+        //Normal Character Collider Height. From the info from Character Controller Object.
         normalColliderHeight = controller.height;
 
     }
 
+    //Update Logic and Update by overriding the functions
     private void Update(){
         movementSM.currentState.HandleInput();
         movementSM.currentState.LogicUpdate();
     }
 
+    //Fixed Update updates the Physics for the player. 
     private void FixedUpdate(){
         movementSM.currentState.PhysicsUpdate();
     }

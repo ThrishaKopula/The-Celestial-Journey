@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//StateMachine: This is the base code for how the character transitions from different states.
+//When you make a "StateMachine", you pass whichever state you start off with.
+//In the Character Class, we make an empty StateMachine on Line 67 and initialize it with the idle state in Line 74.
 public class StateMachine {
     public States currentState;
     

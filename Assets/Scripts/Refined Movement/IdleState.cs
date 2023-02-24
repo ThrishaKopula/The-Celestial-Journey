@@ -8,7 +8,8 @@ public class IdleState : States
    Vector3 currentVelocity;
    float playerSpeed;
    Vector3 cVelocity;
-
+   bool isGrounded;
+   bool drawWeapon;
 
    public IdleState(Character _character, StateMachine _stateMachine) : base(_character,_stateMachine){
         character = _character;
@@ -19,11 +20,13 @@ public class IdleState : States
     {
         base.Enter();
 
+        isGrounded = false;
+        drawWeapon = false;
         input = Vector2.zero;
-        velocity = Vector3.zero;
         currentVelocity = Vector3.zero;
         gravityVelocity.y = 0;
 
+        velocity = character.playerVelocity;
         playerSpeed = character.playerSpeed;
         gravityValue = character.gravityValue;
     }
@@ -32,11 +35,14 @@ public class IdleState : States
     {
         base.HandleInput();
 
+        if(drawWeaponAction.triggered){
+            drawWeapon = true;
+        }
+
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
 
-        velocity = velocity.x * character.cameraTransform.right + velocity.z * character.cameraTransform.forward;
-        velocity.Normalize();
+        velocity = velocity.x * character.cameraTransform.right.normalized + velocity.z * character.cameraTransform.forward.normalized;
         velocity.y = 0f;
 
     }
@@ -44,10 +50,13 @@ public class IdleState : States
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        Debug.Log("Input Magnitude" + input.magnitude);
-        Debug.Log("Character.Speed- " + character.speedDampTime);
         
-        character.animator.SetFloat("Speed",input.magnitude, character.speedDampTime, Time.deltaTime );    
+        character.animator.SetFloat("Speed",input.magnitude, character.speedDampTime, Time.deltaTime);   
+
+        if(drawWeapon){
+            stateMachine.ChangeState(character.combatting);
+            character.animator.SetTrigger("DrawWeapon");
+        } 
     }
 
     public override void PhysicsUpdate()
@@ -56,11 +65,13 @@ public class IdleState : States
  
         gravityVelocity.y += gravityValue * Time.deltaTime;
        
-        if (gravityVelocity.y < 0)
+        if (isGrounded && gravityVelocity.y < 0)
         {
             gravityVelocity.y = 0f;
         }
-       
+
+
+
         currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity,ref cVelocity, character.velocityDampTime);
         character.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime);
   
