@@ -1555,7 +1555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3354, y: 275.08002}
+  m_AnchoredPosition: {x: -3354, y: 275.07996}
   m_SizeDelta: {x: 1686.165, y: 1686.165}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328194140
@@ -2732,7 +2732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1329, y: -34.055}
+  m_AnchoredPosition: {x: 1329, y: -38}
   m_SizeDelta: {x: 976.9552, y: 227.5428}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &703052538
@@ -3668,6 +3668,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1476013375}
+        m_TargetAssemblyTypeName: StatsScrollView, Assembly-CSharp
+        m_MethodName: CloseStatsOverlay
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5195,7 +5207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5383,6 +5395,8 @@ MonoBehaviour:
   currentView: 1
   rightButton: {fileID: 1312569485}
   leftButton: {fileID: 77860489}
+  starAvatar: {fileID: 328194138}
+  venusAvatar: {fileID: 219028167}
 --- !u!1 &1478523493
 GameObject:
   m_ObjectHideFlags: 0
@@ -6020,7 +6034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.48235294}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

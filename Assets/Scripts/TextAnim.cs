@@ -116,17 +116,17 @@ public class TextAnim : MonoBehaviour
         }
     }
 
-    void SlideInLeft(GameObject character)
+    public void SlideInLeft(GameObject character)
     {
         character.transform.LeanMoveLocalX(-1450, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
     }
 
-    void SlideOutLeft(GameObject character)
+    public void SlideOutLeft(GameObject character)
     {
         character.transform.LeanMoveLocalX(-3200, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
     }
 
-    void EndDialogueScreen()
+    public void EndDialogueScreen()
     {
         Time.timeScale = 1.0f;
         backOpacityScreen.SetActive(false);
