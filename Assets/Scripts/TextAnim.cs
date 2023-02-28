@@ -20,6 +20,7 @@ public class TextAnim : MonoBehaviour
     public bool isStarVisible = false;
     public bool isVenusVisible = false;
     public static bool isDialogue;
+    public bool isCurrentlyTyping;
     public GameObject backOpacityScreen;
     public GameObject dialogueScreen;
     int i = 0;
@@ -40,7 +41,7 @@ public class TextAnim : MonoBehaviour
     {
         if(PauseMenu.gameIsPaused == false)
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && isCurrentlyTyping == false)
             {
                 EndCheck();
             }
@@ -68,6 +69,7 @@ public class TextAnim : MonoBehaviour
 
         while(true)
         {
+            isCurrentlyTyping = true;
             int visibleCount = counter % (totalVisibleCharacters + 1);
             _textMeshPro.maxVisibleCharacters = visibleCount;
 
@@ -79,6 +81,7 @@ public class TextAnim : MonoBehaviour
             counter += 1;
             yield return new WaitForSecondsRealtime(timeBtwnChars); 
         }
+        isCurrentlyTyping = false;
     }
 
     void CheckCharacter()

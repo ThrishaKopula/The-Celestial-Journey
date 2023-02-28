@@ -513,6 +513,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 1775877177}
   isStarVisible: 0
   isVenusVisible: 0
+  isCurrentlyTyping: 0
   backOpacityScreen: {fileID: 130978499}
   dialogueScreen: {fileID: 1175974724}
 --- !u!114 &132745532
@@ -1009,7 +1010,7 @@ Animator:
   m_GameObject: {fileID: 254942476}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7ba7836922b43ec4a804659ff5745db9, type: 2}
+  m_Controller: {fileID: 9100000, guid: bb795cc1ce7ae6b4aa598215c1ab9906, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
