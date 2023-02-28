@@ -15,6 +15,8 @@ public class TextAnim : MonoBehaviour
     public int[] venusLines;
     public GameObject starAvatar;
     public GameObject venusAvatar;
+    public GameObject starName;
+    public GameObject venusName;
     public GameObject dialogBox;
     public GameObject pauseMenu;
     public bool isStarVisible = false;
@@ -92,9 +94,12 @@ public class TextAnim : MonoBehaviour
             {
                 SlideOutLeft(venusAvatar);
                 isVenusVisible = false; 
+                venusName.SetActive(isVenusVisible);
             }
             SlideInLeft(starAvatar);
             isStarVisible = true;
+            starName.SetActive(isStarVisible);
+
         }
         else if (System.Array.IndexOf(venusLines, i) > -1)
         {
@@ -103,9 +108,11 @@ public class TextAnim : MonoBehaviour
             {
                 SlideOutLeft(starAvatar);
                 isStarVisible = false;
+                starName.SetActive(isStarVisible);
             }
             SlideInLeft(venusAvatar);
             isVenusVisible=true;
+            venusName.SetActive(isVenusVisible);
         }
     }
 
