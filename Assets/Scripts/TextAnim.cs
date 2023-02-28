@@ -15,11 +15,14 @@ public class TextAnim : MonoBehaviour
     public int[] venusLines;
     public GameObject starAvatar;
     public GameObject venusAvatar;
+    public GameObject starName;
+    public GameObject venusName;
     public GameObject dialogBox;
     public GameObject pauseMenu;
     public bool isStarVisible = false;
     public bool isVenusVisible = false;
     public static bool isDialogue;
+    public bool isCurrentlyTyping;
     public GameObject backOpacityScreen;
     public GameObject dialogueScreen;
     int i = 0;
@@ -40,7 +43,7 @@ public class TextAnim : MonoBehaviour
     {
         if(PauseMenu.gameIsPaused == false)
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && isCurrentlyTyping == false)
             {
                 EndCheck();
             }
@@ -68,6 +71,7 @@ public class TextAnim : MonoBehaviour
 
         while(true)
         {
+            isCurrentlyTyping = true;
             int visibleCount = counter % (totalVisibleCharacters + 1);
             _textMeshPro.maxVisibleCharacters = visibleCount;
 
@@ -79,6 +83,7 @@ public class TextAnim : MonoBehaviour
             counter += 1;
             yield return new WaitForSecondsRealtime(timeBtwnChars); 
         }
+        isCurrentlyTyping = false;
     }
 
     void CheckCharacter()
@@ -89,9 +94,12 @@ public class TextAnim : MonoBehaviour
             {
                 SlideOutLeft(venusAvatar);
                 isVenusVisible = false; 
+                venusName.SetActive(isVenusVisible);
             }
             SlideInLeft(starAvatar);
             isStarVisible = true;
+            starName.SetActive(isStarVisible);
+
         }
         else if (System.Array.IndexOf(venusLines, i) > -1)
         {
@@ -100,23 +108,25 @@ public class TextAnim : MonoBehaviour
             {
                 SlideOutLeft(starAvatar);
                 isStarVisible = false;
+                starName.SetActive(isStarVisible);
             }
             SlideInLeft(venusAvatar);
             isVenusVisible=true;
+            venusName.SetActive(isVenusVisible);
         }
     }
 
-    void SlideInLeft(GameObject character)
+    public void SlideInLeft(GameObject character)
     {
         character.transform.LeanMoveLocalX(-1450, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
     }
 
-    void SlideOutLeft(GameObject character)
+    public void SlideOutLeft(GameObject character)
     {
         character.transform.LeanMoveLocalX(-3200, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
     }
 
-    void EndDialogueScreen()
+    public void EndDialogueScreen()
     {
         Time.timeScale = 1.0f;
         backOpacityScreen.SetActive(false);
