@@ -11,11 +11,13 @@ public class StatsScrollView : MonoBehaviour
     public GameObject leftButton;
     public GameObject starAvatar;
     public GameObject venusAvatar;
+    public GameObject starName;
+    public GameObject venusName;
     // Start is called before the first frame update
     void Start()
     {
-        
-        starAvatar.transform.LeanMoveLocalX(-1450, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
+        starAvatar.transform.LeanMoveLocalX(-1000, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
+        starName.SetActive(true);
     }
 
     // Update is called once per frame
@@ -47,17 +49,21 @@ public class StatsScrollView : MonoBehaviour
 
     public void GoRight()
     {
-        scrollObj.transform.LeanMoveLocalX(-3840, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
+        //scrollObj.transform.LeanMoveLocalX(-3840, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
         starAvatar.transform.LeanMoveLocalX(-3200, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
-        venusAvatar.transform.LeanMoveLocalX(-1450, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
+        starName.SetActive(false);
+        venusName.SetActive(true);
+        venusAvatar.transform.LeanMoveLocalX(-1000, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
         currentView += 1;
     }
 
     public void GoLeft()
     {
-        scrollObj.transform.LeanMoveLocalX(0, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
+        //scrollObj.transform.LeanMoveLocalX(0, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
         venusAvatar.transform.LeanMoveLocalX(-3200, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
-        starAvatar.transform.LeanMoveLocalX(-1450, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
+        starAvatar.transform.LeanMoveLocalX(-1000, 0.7f).setEaseOutQuint().setIgnoreTimeScale(true);
+        starName.SetActive(true);
+        venusName.SetActive(false);
         currentView -= 1;
     }
 
