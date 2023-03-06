@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject backOpacityScreen;
+    public GameObject levelChange;
 
     // Update is called once per frame
     void Update()
@@ -57,7 +58,8 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         ResumeGame();
-        SceneManager.LoadScene(0);
+        levelChange.GetComponent<LevelChanger>().FadeToLevel(0);
+        //SceneManager.LoadScene(0);
     }
 
 }
