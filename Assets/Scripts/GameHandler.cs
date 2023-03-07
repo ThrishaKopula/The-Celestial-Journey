@@ -122,31 +122,17 @@ public class GameHandler : MonoBehaviour
     }
 
     public void Swap(int index) {
-        //Debug.Log("called " + index);
         if (index < 0 || index > CharacterList.Count - 1) return; // bounds check
-        //Debug.Log("checked bounds");
         if (whichCharacter == index) return; // swapping to the same character
         whichCharacter = index;
-        //keep track of where the player currently is and looking
-        Vector3 currentposition = character.transform.position;
-        Vector3 currentEulerAngle = character.transform.eulerAngles;
-        //disables every character besides the current one
-        for (int i = 0; i < CharacterList.Count; i ++) {
-            if (i != whichCharacter) {
-                CharacterList[i].SetActive(false);
-            }
-        }
-        CharacterList[whichCharacter].SetActive(true);
-        character = (CharacterList[whichCharacter]);
-        character.transform.position = currentposition;
-        character.transform.eulerAngles = currentEulerAngle;
-        //m_ParticleSystem.transform.position = currentposition;
-        //m_ParticleSystem.Play();
+        //keep track of where the player and rotation currently is
+        Vector3 position = character.transform.position;
+        Quaternion rotation = character.transform.rotation;
+        if (character != null) Destroy(character);
+        character = Instantiate(CharacterList[whichCharacter], position, rotation);
         cameraMovement.PlayerTransform = character.transform;
-
-        // if (character != null) Destroy(character);
-        // character = Instantiate(CharacterList[whichCharacter]);
-        // cameraMovement.PlayerTransform = character.transform;
+        m_ParticleSystem.transform.position = position;
+        m_ParticleSystem.Play();
     }
     
     public void nextRoom(){
