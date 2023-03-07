@@ -29,6 +29,10 @@ public class Character : MonoBehaviour
 
     public HeavyAttackState heavyAttacking;
 
+    public SpecialAttackState specialAttacking;
+
+    public DodgeState dodge;
+
     //Gravity for the character
     [HideInInspector]
     public float gravityValue = -9.81f;
@@ -76,9 +80,10 @@ public class Character : MonoBehaviour
         combatting = new CombatState(this,movementSM);
         lightAttacking = new LightAttackState(this,movementSM);
         heavyAttacking = new HeavyAttackState(this,movementSM);
-        // dodge = new DodgeState(this,movementSM);
+        specialAttacking = new SpecialAttackState(this,movementSM);
+        dodge = new DodgeState(this,movementSM);
         
-        movementSM.Initialize(idle);
+        movementSM.Initialize(combatting);
 
         //Normal Character Collider Height. From the info from Character Controller Object.
         normalColliderHeight = controller.height;

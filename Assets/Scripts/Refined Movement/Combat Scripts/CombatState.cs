@@ -9,10 +9,15 @@ public class CombatState : States
    float playerSpeed;
    Vector3 cVelocity;
    bool isGrounded;
+   bool isDashing;
    bool sheathWeapon;
    bool lightAttackCombo;
 
+   bool dodging;
    bool heavyAttack;
+
+   bool specialAttack;
+  
 
    public CombatState(Character _character, StateMachine _stateMachine) : base(_character,_stateMachine){
         character = _character;
@@ -27,6 +32,9 @@ public class CombatState : States
         isGrounded = false;
         lightAttackCombo = false;
         heavyAttack = false;
+        specialAttack = false;
+        isDashing = false;
+        dodging = false;
         input = Vector2.zero;
         currentVelocity = Vector3.zero;
         gravityVelocity.y = 0;
@@ -45,6 +53,12 @@ public class CombatState : States
         }
 
 
+        //Enter Dash State 
+        if(dodgeAction.triggered){
+            dodging = true;
+        }
+
+
         //If Light Attack Action triggered Set LightAttack to True;
         if(lightAttackAction.triggered){
             lightAttackCombo = true;
@@ -53,6 +67,11 @@ public class CombatState : States
         //If Heavy Attack Action triggered Set LightAttack to True;
         if(heavyAttackAction.triggered){
             heavyAttack = true;
+        }
+
+        //If Heavy Attack Action triggered Set LightAttack to True;
+        if(specialAttackAction.triggered){
+            specialAttack = true;
         }
 
         //Read the Player Input and Create a new vector 2 in the direction of the inputs.
@@ -71,6 +90,11 @@ public class CombatState : States
         
         character.animator.SetFloat("Speed",input.magnitude, character.speedDampTime, Time.deltaTime);   
 
+        if(dodging){
+            character.animator.SetTrigger("Dodge");
+            stateMachine.ChangeState(character.dodge);
+        }
+
         if(sheathWeapon){
             character.animator.SetTrigger("SheathWeapon");
             stateMachine.ChangeState(character.idle);
@@ -84,6 +108,11 @@ public class CombatState : States
          if(heavyAttack){
             character.animator.SetTrigger("HeavyAttack");
             stateMachine.ChangeState(character.heavyAttacking);
+        } 
+
+         if(specialAttack){
+            character.animator.SetTrigger("SpecialAttack");
+            stateMachine.ChangeState(character.specialAttacking);
         } 
     }
 
