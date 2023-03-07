@@ -194,6 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc3dcd79ed9e9f4d93d779343b59a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Iroha
+  maxHealth: 10
   playerSpeed: 5
   gravityMultiplier: 2
   rotationSpeed: 5

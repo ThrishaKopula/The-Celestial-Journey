@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 //Refined Movement: Contains all information for the player so that we can access 
 public class Character : MonoBehaviour
 {
+
+    public string characterName = "defaultName";
+    public float maxHealth = 10;
+
     [Header("Controls")]
     public float playerSpeed = 5.0f;
     public float gravityMultiplier = 2;
