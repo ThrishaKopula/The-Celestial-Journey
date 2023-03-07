@@ -55,6 +55,7 @@ public class GameHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             Swap(1);
         }
+
     }
     //Health interaction functions
     public float GetHealth(){
@@ -140,4 +141,5 @@ public class GameHandler : MonoBehaviour
         if (room != null)
         Destroy(room.gameObject);
     }
+
 }
