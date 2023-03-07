@@ -16,10 +16,14 @@ public class GameHandler : MonoBehaviour
     public Dictionary<string, float> CharacterHealths;
 
     //current character
-    public int whichCharacter;
+    int whichCharacter;
 
     //particle system
     public ParticleSystem m_ParticleSystem;
+
+    public List<GameObject> roomList;
+    int whichRoom = 0;
+    Room room;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +39,7 @@ public class GameHandler : MonoBehaviour
                 }
             }
         }
+        CharacterHealths = new Dictionary<string, float>();
     }
 
     // Update is called once per frame
@@ -72,11 +77,15 @@ public class GameHandler : MonoBehaviour
 
 
     //damage to deal to the player
-    public void Damage(int damage){
-        // CharacterHealths[character.GetComponent<Character>().name] -= damage;
-        // if (CharacterHealths[character.GetComponent<Character>().name] < 0){
-        //     //character died / incapacitated
-        // }
+    public void Damage(float damage){
+        
+        CharacterHealths.TryAdd(character.GetComponent<Character>().name, 10);
+        CharacterHealths[character.GetComponent<Character>().name] -= damage;
+        //Debug.Log("Enemy did damage!");
+        if (CharacterHealths[character.GetComponent<Character>().name] < 0){
+            //Debug.Log("Character died!");
+            //character died / incapacitated
+        }
     }
     public void Damage(int damage, string charName){
         CharacterHealths[charName] -= damage;
@@ -131,13 +140,33 @@ public class GameHandler : MonoBehaviour
         character = (CharacterList[whichCharacter]);
         character.transform.position = currentposition;
         character.transform.eulerAngles = currentEulerAngle;
-        m_ParticleSystem.transform.position = currentposition;
-        m_ParticleSystem.Play();
+        //m_ParticleSystem.transform.position = currentposition;
+        //m_ParticleSystem.Play();
         cameraMovement.PlayerTransform = character.transform;
 
         // if (character != null) Destroy(character);
         // character = Instantiate(CharacterList[whichCharacter]);
         // cameraMovement.PlayerTransform = character.transform;
-        //character.GetComponent<ThirdPersonMovement>().enabled = true;
+    }
+    
+    public void nextRoom(){
+        unloadRoom();
+        whichRoom++;
+        loadRoom(whichRoom);
+    }
+
+    public void loadRoom(int index){
+        if (index >= roomList.Count) return;
+        //create the prefab of the room in the game world
+        GameObject roomObject = Instantiate(roomList[index], Vector3.zero, this.transform.rotation);
+        //get the room script to find locations of the player spawn
+        room = roomObject.GetComponent<Room>();
+        //move the player to the spawn position
+        character.transform.position = room.playerSpawnLocation.transform.position;
+    }
+
+    public void unloadRoom(){
+        if (room != null)
+        Destroy(room.gameObject);
     }
 }
