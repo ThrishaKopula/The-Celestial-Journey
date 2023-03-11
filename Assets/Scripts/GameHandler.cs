@@ -26,8 +26,9 @@ public class GameHandler : MonoBehaviour
     int whichRoom = 0;
     Room room;
 
-    //HealthBars
+    //Health Bar and Ult Bar
     public Slider healthBar;
+    public Slider ultBar;
     private float lerpSpeed = 0.25f;
     private float time;
 
@@ -59,6 +60,7 @@ public class GameHandler : MonoBehaviour
     void Update()
     {
         AnimatedHealthBar();
+        AnimatedUltBar();
 
         //going left through the list
         if (Input.GetKeyDown(KeyCode.Z)){
@@ -180,6 +182,13 @@ public class GameHandler : MonoBehaviour
         float startHealth = healthBar.value;
         time += Time.deltaTime * lerpSpeed;
         healthBar.value = Mathf.Lerp(startHealth, targetHealth, time);
-        
+    }
+
+    private void AnimatedUltBar()
+    {
+        float targetHealth = ultBar.value + 1;
+        float startHealth = ultBar.value;
+        time += Time.deltaTime * lerpSpeed;
+        ultBar.value = Mathf.Lerp(startHealth, targetHealth, time);
     }
 }
