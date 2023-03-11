@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour
 {
@@ -25,9 +26,15 @@ public class GameHandler : MonoBehaviour
     int whichRoom = 0;
     Room room;
 
+    //HealthBars
+    public Slider healthBar;
+    private float lerpSpeed = 0.25f;
+    private float time;
+
     // Start is called before the first frame update
     void Start()
     {
+        healthBar.maxValue = character.GetComponent<Character>().maxHealth;
         //setting character to the first character on startup
         if (character == null && CharacterList.Count >= 1) {
             character = Instantiate(CharacterList[0], this.transform.position, this.transform.rotation);
@@ -51,6 +58,8 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AnimatedHealthBar();
+
         //going left through the list
         if (Input.GetKeyDown(KeyCode.Z)){
             PreviousCharacter();
@@ -87,6 +96,8 @@ public class GameHandler : MonoBehaviour
         
         //CharacterHealths.TryAdd(character.GetComponent<Character>().characterName, 10);
         CharacterHealths[character.GetComponent<Character>().characterName] -= damage;
+        //character.GetComponent<Character>().healthBar.SetHealth(CharacterHealths[character.GetComponent<Character>().characterName]);
+        time = 0;
         //Debug.Log("Enemy did damage!");
         if (CharacterHealths[character.GetComponent<Character>().characterName] < 0){
             Debug.Log("Character " + character.GetComponent<Character>().characterName + " died!");
@@ -161,5 +172,14 @@ public class GameHandler : MonoBehaviour
     public void unloadRoom(){
         if (room != null)
         Destroy(room.gameObject);
+    }
+
+    private void AnimatedHealthBar()
+    {
+        float targetHealth = CharacterHealths[character.GetComponent<Character>().characterName];
+        float startHealth = healthBar.value;
+        time += Time.deltaTime * lerpSpeed;
+        healthBar.value = Mathf.Lerp(startHealth, targetHealth, time);
+        
     }
 }

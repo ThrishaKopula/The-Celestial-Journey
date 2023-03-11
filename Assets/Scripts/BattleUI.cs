@@ -17,14 +17,14 @@ public class BattleUI : MonoBehaviour
     void Update()
     {
         //swap to 0
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             starActiveIcon.SetActive(true);
             venusActiveIcon.SetActive(false);
         }
 
         //swap to 1
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             starActiveIcon.SetActive(false);
             venusActiveIcon.SetActive(true);
