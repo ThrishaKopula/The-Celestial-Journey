@@ -15,6 +15,7 @@ public class GameHandler : MonoBehaviour
     //A dictionary of the character names, and their health value. Since each character will have a
     //unique name, we can always know how much health a character has, and we can always access their values.
     public Dictionary<string, float> CharacterHealths;
+    public Dictionary<string, float> CharacterUlts;
 
     //current character
     int whichCharacter;
@@ -51,8 +52,10 @@ public class GameHandler : MonoBehaviour
         // }
         //initialize the dictionary of healths, 
         CharacterHealths = new Dictionary<string, float>();
+        CharacterUlts = new Dictionary<string, float>();
         foreach (GameObject characterloop in CharacterList){
             CharacterHealths.TryAdd(characterloop.GetComponent<Character>().characterName, characterloop.GetComponent<Character>().maxHealth);
+            CharacterUlts.TryAdd(characterloop.GetComponent<Character>().characterName, 0);
         }
     }
 
@@ -92,6 +95,11 @@ public class GameHandler : MonoBehaviour
         return CharacterHealths[charName];
     }
 
+    public float GetUlt(string charName)
+    {
+        return CharacterUlts[charName];
+    }
+
 
     //damage to deal to the player
     public void Damage(float damage){
@@ -112,6 +120,11 @@ public class GameHandler : MonoBehaviour
         if (CharacterHealths[charName] < 0){
             //character died / incapacitated
         }
+    }
+
+    public void EnemyHit()
+    {
+        CharacterUlts[character.GetComponent<Character>().characterName]++;
     }
 
     //Character swapping functions
@@ -186,7 +199,7 @@ public class GameHandler : MonoBehaviour
 
     private void AnimatedUltBar()
     {
-        float targetHealth = ultBar.value + 1;
+        float targetHealth = CharacterUlts[character.GetComponent<Character>().characterName];
         float startHealth = ultBar.value;
         time += Time.deltaTime * lerpSpeed;
         ultBar.value = Mathf.Lerp(startHealth, targetHealth, time);
