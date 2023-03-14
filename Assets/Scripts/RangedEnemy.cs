@@ -6,7 +6,8 @@ public class RangedEnemy : MonoBehaviour
 {
     public float health = 10.0f;
     public float movementSpeed = 2.0f;
-    public float distanceToKeep = 10.0f;
+    public float minimumDistance = 10.0f;
+    public float maximumDistance = 30.0f;
     public float timeBetweenAttacks = 3.0f;
     public GameObject projectilePrefab;
     public Transform projectileSpawnPosition;
@@ -15,7 +16,7 @@ public class RangedEnemy : MonoBehaviour
     Rigidbody rb;
 
     GameHandler gameHandler;
-    private string state = "Fleeing";
+    private string state = "Waiting";
     private float waitTimeInitiated = 0;
 
     private void Awake() {
@@ -45,7 +46,29 @@ public class RangedEnemy : MonoBehaviour
                 this.transform.LookAt(lookAtPosition, Vector3.up);
 
                 // switch state if it gets far enough away.
-                if (direction.magnitude >= distanceToKeep) state = "Attack"; 
+                if (direction.magnitude >= minimumDistance) state = "Attack"; 
+                direction.y = 0;//dont move the characters vertically
+                direction = direction.normalized * movementSpeed;
+                this.transform.position += direction * Time.deltaTime;
+                break;
+            
+            case "Approaching":
+                if (gameHandler.character != null){
+                    targetPosition = gameHandler.character.transform.position;
+                }else{
+                    targetPosition = this.transform.position;
+                    Debug.Log("Cant find the player!");
+                }
+                
+                direction = targetPosition - this.transform.position;
+                //look at player
+                lookAtPosition = (this.transform.position + direction);
+                lookAtPosition.y = this.transform.position.y;
+                if (this.transform.position != targetPosition){
+                    this.transform.LookAt(lookAtPosition, Vector3.up);// wont try to look at itself, cause that might cause problems
+                }
+                // switch state if it gets close enough
+                if (direction.magnitude <= maximumDistance) state = "Attack"; 
                 direction.y = 0;//dont move the characters vertically
                 direction = direction.normalized * movementSpeed;
                 this.transform.position += direction * Time.deltaTime;
@@ -61,7 +84,7 @@ public class RangedEnemy : MonoBehaviour
                     Debug.Log("Cant find the player!");
                 }
                 direction = targetPosition - this.transform.position;
-                //look away from player
+                //look at player
                 lookAtPosition = (this.transform.position + direction);
                 lookAtPosition.y = this.transform.position.y;
                 this.transform.LookAt(lookAtPosition, Vector3.up);
@@ -89,9 +112,23 @@ public class RangedEnemy : MonoBehaviour
                 //wait for "timeBetweenAttacks" seconds. This could be done with a coroutine, but
                 // screw it i'm doing it like this.
                 if (Time.time >= waitTimeInitiated + timeBetweenAttacks) {
-                    state = "Fleeing";
+                    //get the vector from this enemy to the character
+                    if (gameHandler.character != null){
+                        targetPosition = gameHandler.character.transform.position;
+                    }else{
+                        targetPosition = this.transform.position;
+                        Debug.Log("Cant find the player!");
+                    }
+                    direction = targetPosition - this.transform.position;
+                    float distance = direction.magnitude;
+                    if (distance > maximumDistance){
+                        state = "Approaching";
+                    }else if (distance < minimumDistance){
+                        state = "Fleeing";
+                    }else{
+                        state = "Attack";
+                    }
                 }
-
                 break;
             default:
                 break;

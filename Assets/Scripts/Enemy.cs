@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float health = 10;
-    public float movementSpeed = 10;
+    public float health = 10.0f;
+    public float damage = 5.0f;
+    public float movementSpeed = 2.0f;
+    public float minimumDistance = 0.0f;
+    public float maximumDistance = 4.0f;
+    public float timeBetweenAttacks = 3.0f;
+    
 
-    public float damage = 5;
     Rigidbody rb;
 
     GameHandler gameHandler;
+    private string state = "Waiting";
+    private float waitTimeInitiated = 0;
 
     private void Awake() {
         gameHandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
@@ -20,20 +26,104 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //move toward player
         Vector3 targetPosition;
-        if (gameHandler.character != null){
-            targetPosition = gameHandler.character.transform.position;
-        }else{
-            targetPosition = this.transform.position;
-            Debug.Log("Cant find the player!");
+        Vector3 direction;
+        Vector3 lookAtPosition;
+        //basically using a state machine for the enemy.
+        switch (state) {
+            case "Fleeing":
+                if (gameHandler.character != null){
+                    targetPosition = gameHandler.character.transform.position;
+                }else{
+                    targetPosition = this.transform.position;
+                    Debug.Log("Cant find the player!");
+                }
+                direction = this.transform.position - targetPosition;
+                //look away from player
+                lookAtPosition = (this.transform.position + direction);
+                lookAtPosition.y = this.transform.position.y;
+                this.transform.LookAt(lookAtPosition, Vector3.up);
+
+                // switch state if it gets far enough away.
+                if (direction.magnitude >= minimumDistance) state = "Attack"; 
+                direction.y = 0;//dont move the characters vertically
+                direction = direction.normalized * movementSpeed;
+                this.transform.position += direction * Time.deltaTime;
+                break;
+            
+            case "Approaching":
+                if (gameHandler.character != null){
+                    targetPosition = gameHandler.character.transform.position;
+                }else{
+                    targetPosition = this.transform.position;
+                    Debug.Log("Cant find the player!");
+                }
+                
+                direction = targetPosition - this.transform.position;
+                //look at player
+                lookAtPosition = (this.transform.position + direction);
+                lookAtPosition.y = this.transform.position.y;
+                if (this.transform.position != targetPosition){
+                    this.transform.LookAt(lookAtPosition, Vector3.up);// wont try to look at itself, cause that might cause problems
+                }
+                // switch state if it gets close enough
+                if (direction.magnitude <= maximumDistance) state = "Attack"; 
+                direction.y = 0;//dont move the characters vertically
+                direction = direction.normalized * movementSpeed;
+                this.transform.position += direction * Time.deltaTime;
+                break;
+
+            case "Attack":
+                //Attack the player
+                //look at the player:
+                if (gameHandler.character != null){
+                    targetPosition = gameHandler.character.transform.position;
+                }else{
+                    targetPosition = this.transform.position;
+                    Debug.Log("Cant find the player!");
+                }
+                direction = targetPosition - this.transform.position;
+                //look at player
+                lookAtPosition = (this.transform.position + direction);
+                lookAtPosition.y = this.transform.position.y;
+                this.transform.LookAt(lookAtPosition, Vector3.up);
+
+                //start an animation here? <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+                //lunge at the player and attack!
+                rb.AddForce(direction * movementSpeed + new Vector3(0,6,0), ForceMode.Impulse);
+
+                //switch to wait for attack delay
+                state = "Waiting";
+                waitTimeInitiated = Time.time;
+
+                break;
+
+            case "Waiting":
+                //wait for "timeBetweenAttacks" seconds. This could be done with a coroutine, but
+                // screw it i'm doing it like this.
+                if (Time.time >= waitTimeInitiated + timeBetweenAttacks) {
+                    //get the vector from this enemy to the character
+                    if (gameHandler.character != null){
+                        targetPosition = gameHandler.character.transform.position;
+                    }else{
+                        targetPosition = this.transform.position;
+                        Debug.Log("Cant find the player!");
+                    }
+                    direction = targetPosition - this.transform.position;
+                    float distance = direction.magnitude;
+                    if (distance > maximumDistance){
+                        state = "Approaching";
+                    }else if (distance < minimumDistance){
+                        state = "Fleeing";
+                    }else{
+                        state = "Attack";
+                    }
+                }
+                break;
+            default:
+                break;
         }
-        Vector3 direction = targetPosition - this.transform.position;
-        direction.y = 0;
-
-        direction = direction.normalized * movementSpeed;
-
-        this.transform.position += direction * Time.deltaTime;
         
     }
 
@@ -59,4 +149,5 @@ public class Enemy : MonoBehaviour
             this.GetComponent<Rigidbody>().AddForce(direction.normalized * movementSpeed * 2 +  new Vector3(0,1 * movementSpeed * 2,0), ForceMode.Impulse);
         }
     }
+
 }
