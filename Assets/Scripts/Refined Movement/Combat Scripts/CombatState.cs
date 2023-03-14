@@ -71,7 +71,12 @@ public class CombatState : States
 
         //If Heavy Attack Action triggered Set LightAttack to True;
         if(specialAttackAction.triggered){
-            specialAttack = true;
+            GameHandler gameHandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
+            if (gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName] >= character.maxUlt)
+            {
+                specialAttack = true;
+            }
+            
         }
 
         //Read the Player Input and Create a new vector 2 in the direction of the inputs.

@@ -37,6 +37,7 @@ public class GameHandler : MonoBehaviour
     void Start()
     {
         healthBar.maxValue = character.GetComponent<Character>().maxHealth;
+        ultBar.maxValue = character.GetComponent<Character>().maxUlt;
         //setting character to the first character on startup
         if (character == null && CharacterList.Count >= 1) {
             character = Instantiate(CharacterList[0], this.transform.position, this.transform.rotation);

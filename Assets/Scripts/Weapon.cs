@@ -13,7 +13,8 @@ public class Weapon : MonoBehaviour
         Enemy enemy = other.gameObject.GetComponent<Enemy>();
         if (enemy != null){
             GameHandler gameHandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
-            gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName]++;
+            gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName] += 1;
+            Debug.Log(gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName]);
             if (enemy.Damage(damage)){
                 Destroy(enemy.gameObject);
             }
