@@ -122,11 +122,6 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    public void EnemyHit()
-    {
-        CharacterUlts[character.GetComponent<Character>().characterName]++;
-    }
-
     //Character swapping functions
     public void PreviousCharacter(){
         //decrement the whichCharacter, with wraparound
