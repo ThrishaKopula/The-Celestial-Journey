@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class RangedEnemy : MonoBehaviour
 {
     public float health = 10.0f;
-    public float damage = 5.0f;
     public float movementSpeed = 2.0f;
-    public float minimumDistance = 0.0f;
-    public float maximumDistance = 4.0f;
+    public float minimumDistance = 10.0f;
+    public float maximumDistance = 30.0f;
     public float timeBetweenAttacks = 3.0f;
+    public GameObject projectilePrefab;
+    public Transform projectileSpawnPosition;
     
 
     Rigidbody rb;
@@ -90,8 +91,16 @@ public class Enemy : MonoBehaviour
 
                 //start an animation here? <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-                //lunge at the player and attack!
-                rb.AddForce(direction * movementSpeed + new Vector3(0,6,0), ForceMode.Impulse);
+                //Spawn the prefab of the projectile
+                Vector3 position;
+                if (projectileSpawnPosition != null)
+                    {position = projectileSpawnPosition.position;}
+                else {position = this.transform.position;}
+
+                if (projectilePrefab != null){
+                    GameObject projectile = Instantiate(projectilePrefab, position, this.transform.rotation);
+                    //either add the projectile velocity here, or let the projectile do this on it's own.
+                }
 
                 //switch to wait for attack delay
                 state = "Waiting";
@@ -136,18 +145,6 @@ public class Enemy : MonoBehaviour
             return true;
         }
         else return false;
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        Character character = other.GetComponent<Character>();
-        if (character != null){
-            //do damage
-            gameHandler.Damage(damage);
-            //do a kickback force to get them out of the collider, but could probably use a delay on another hit
-            Vector3 direction = this.transform.position - character.gameObject.transform.position;
-            direction.y = 0;
-            this.GetComponent<Rigidbody>().AddForce(direction.normalized * movementSpeed * 2 +  new Vector3(0,1 * movementSpeed * 2,0), ForceMode.Impulse);
-        }
     }
 
 }
