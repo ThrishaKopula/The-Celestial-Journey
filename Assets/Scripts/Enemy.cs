@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     public float health = 10.0f;
     public float damage = 5.0f;
     public float movementSpeed = 2.0f;
+    public float lungeSpeed = 0.8f;
+    public float lungeHeight = 6.0f;
     public float minimumDistance = 0.0f;
     public float maximumDistance = 4.0f;
     public float timeBetweenAttacks = 3.0f;
@@ -91,7 +93,7 @@ public class Enemy : MonoBehaviour
                 //start an animation here? <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
                 //lunge at the player and attack!
-                rb.AddForce(direction * movementSpeed + new Vector3(0,6,0), ForceMode.Impulse);
+                rb.AddForce(direction * lungeSpeed + new Vector3(0,lungeHeight,0), ForceMode.Impulse);
 
                 //switch to wait for attack delay
                 state = "Waiting";

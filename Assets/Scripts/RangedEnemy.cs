@@ -111,15 +111,21 @@ public class RangedEnemy : MonoBehaviour
             case "Waiting":
                 //wait for "timeBetweenAttacks" seconds. This could be done with a coroutine, but
                 // screw it i'm doing it like this.
+                if (gameHandler.character != null){
+                    targetPosition = gameHandler.character.transform.position;
+                }else{
+                    targetPosition = this.transform.position;
+                    Debug.Log("Cant find the player!");
+                }
+                direction = targetPosition - this.transform.position;
+                //keep looking at player
+                lookAtPosition = (this.transform.position + direction);
+                lookAtPosition.y = this.transform.position.y;
+                this.transform.LookAt(lookAtPosition, Vector3.up);
+                
                 if (Time.time >= waitTimeInitiated + timeBetweenAttacks) {
                     //get the vector from this enemy to the character
-                    if (gameHandler.character != null){
-                        targetPosition = gameHandler.character.transform.position;
-                    }else{
-                        targetPosition = this.transform.position;
-                        Debug.Log("Cant find the player!");
-                    }
-                    direction = targetPosition - this.transform.position;
+                    
                     float distance = direction.magnitude;
                     if (distance > maximumDistance){
                         state = "Approaching";
