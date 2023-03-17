@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
 
     public string characterName = "defaultName";
     public float maxHealth = 10;
+    public float maxUlt = 10;
 
     [Header("Controls")]
     public float playerSpeed = 5.0f;

@@ -12,9 +12,13 @@ public class Weapon : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         Enemy enemy = other.gameObject.GetComponent<Enemy>();
         if (enemy != null){
+            GameHandler gameHandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
+            gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName] += 1;
+            Debug.Log(gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName]);
             if (enemy.Damage(damage)){
                 Destroy(enemy.gameObject);
             }
         }
+        
     }
 }

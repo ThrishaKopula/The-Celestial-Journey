@@ -5,20 +5,14 @@ using UnityEngine;
 public class GameOver : MonoBehaviour
 {
     public GameObject levelChange;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ReturnToMain()
     {
         levelChange.GetComponent<LevelChanger>().FadeToLevel(0);
+    }
+
+    public void Continue()
+    {
+
     }
 }

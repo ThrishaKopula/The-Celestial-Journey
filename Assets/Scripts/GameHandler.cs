@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameHandler : MonoBehaviour
     //A dictionary of the character names, and their health value. Since each character will have a
     //unique name, we can always know how much health a character has, and we can always access their values.
     public Dictionary<string, float> CharacterHealths;
+    public Dictionary<string, float> CharacterUlts;
 
     //current character
     int whichCharacter;
@@ -25,9 +27,17 @@ public class GameHandler : MonoBehaviour
     int whichRoom = 0;
     Room room;
 
+    //Health Bar and Ult Bar
+    public Slider healthBar;
+    public Slider ultBar;
+    private float lerpSpeed = 0.25f;
+    private float time;
+
     // Start is called before the first frame update
     void Start()
     {
+        healthBar.maxValue = character.GetComponent<Character>().maxHealth;
+        ultBar.maxValue = character.GetComponent<Character>().maxUlt;
         //setting character to the first character on startup
         if (character == null && CharacterList.Count >= 1) {
             character = Instantiate(CharacterList[0], this.transform.position, this.transform.rotation);
@@ -43,14 +53,19 @@ public class GameHandler : MonoBehaviour
         // }
         //initialize the dictionary of healths, 
         CharacterHealths = new Dictionary<string, float>();
+        CharacterUlts = new Dictionary<string, float>();
         foreach (GameObject characterloop in CharacterList){
             CharacterHealths.TryAdd(characterloop.GetComponent<Character>().characterName, characterloop.GetComponent<Character>().maxHealth);
+            CharacterUlts.TryAdd(characterloop.GetComponent<Character>().characterName, 0);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        AnimatedHealthBar();
+        AnimatedUltBar();
+
         //going left through the list
         if (Input.GetKeyDown(KeyCode.Z)){
             PreviousCharacter();
@@ -81,12 +96,19 @@ public class GameHandler : MonoBehaviour
         return CharacterHealths[charName];
     }
 
+    public float GetUlt(string charName)
+    {
+        return CharacterUlts[charName];
+    }
+
 
     //damage to deal to the player
     public void Damage(float damage){
         
         //CharacterHealths.TryAdd(character.GetComponent<Character>().characterName, 10);
         CharacterHealths[character.GetComponent<Character>().characterName] -= damage;
+        //character.GetComponent<Character>().healthBar.SetHealth(CharacterHealths[character.GetComponent<Character>().characterName]);
+        time = 0;
         //Debug.Log("Enemy did damage!");
         if (CharacterHealths[character.GetComponent<Character>().characterName] < 0){
             Debug.Log("Character " + character.GetComponent<Character>().characterName + " died!");
@@ -161,5 +183,21 @@ public class GameHandler : MonoBehaviour
     public void unloadRoom(){
         if (room != null)
         Destroy(room.gameObject);
+    }
+
+    private void AnimatedHealthBar()
+    {
+        float targetHealth = CharacterHealths[character.GetComponent<Character>().characterName];
+        float startHealth = healthBar.value;
+        time += Time.deltaTime * lerpSpeed;
+        healthBar.value = Mathf.Lerp(startHealth, targetHealth, time);
+    }
+
+    private void AnimatedUltBar()
+    {
+        float targetHealth = CharacterUlts[character.GetComponent<Character>().characterName];
+        float startHealth = ultBar.value;
+        time += Time.deltaTime * lerpSpeed;
+        ultBar.value = Mathf.Lerp(startHealth, targetHealth, time);
     }
 }
