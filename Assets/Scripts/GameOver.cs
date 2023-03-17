@@ -13,6 +13,6 @@ public class GameOver : MonoBehaviour
 
     public void Continue()
     {
-
+        levelChange.GetComponent<LevelChanger>().FadeToLevel(1);
     }
 }
