@@ -33,7 +33,7 @@ public class GameHandler : MonoBehaviour
     private float lerpSpeed = 0.25f;
     private float time;
 
-    public int enemiesToWin = 1;
+    public int enemiesToWin = 5;
     public int enemiesDefeated = 0;
     public GameObject levelChange;
 
