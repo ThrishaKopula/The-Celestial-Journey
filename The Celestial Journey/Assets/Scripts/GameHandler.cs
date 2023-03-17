@@ -18,6 +18,13 @@ public class GameHandler : MonoBehaviour
     //current character
     int whichCharacter;
 
+    //char 1
+    private bool switch1 = true;
+    //char 2
+    private bool switch2 = true;
+    //char 3
+    private bool switch3 = true;
+
     //particle system
     public ParticleSystem m_ParticleSystem;
 
@@ -32,6 +39,7 @@ public class GameHandler : MonoBehaviour
         if (character == null && CharacterList.Count >= 1) {
             character = Instantiate(CharacterList[0], this.transform.position, this.transform.rotation);
         }
+<<<<<<< Updated upstream:The Celestial Journey/Assets/Scripts/GameHandler.cs
         if (CharacterList.Count >= 1) {
             for (int i = 0; i < CharacterList.Count; i++) {
                 if (i != whichCharacter) {
@@ -39,6 +47,9 @@ public class GameHandler : MonoBehaviour
                 }
             }
         }
+=======
+        //initialize the dictionary of healths, 
+>>>>>>> Stashed changes:Assets/Scripts/GameHandler.cs
         CharacterHealths = new Dictionary<string, float>();
     }
 
@@ -56,14 +67,26 @@ public class GameHandler : MonoBehaviour
         
         //swap to 0
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            Swap(0);
-            //PreviousCharacter();
+            if (switch1) {
+                StartCoroutine(SwapCooldown(whichCharacter));
+                Swap(0);
+            }
         }
 
-        //swap to 1
+        //swap to 1 if possible
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            Swap(1);
-            //NextCharacter();
+            if (CharacterList.Count >= 1 && switch2) {
+                StartCoroutine(SwapCooldown(whichCharacter));
+                Swap(1);
+            }
+        }
+
+        //swap to 2 if possible
+        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            if (CharacterList.Count >= 2 && switch3) {
+                StartCoroutine(SwapCooldown(whichCharacter));
+                Swap(2);
+            }
         }
     }
     //Health interaction functions
@@ -133,6 +156,22 @@ public class GameHandler : MonoBehaviour
         cameraMovement.PlayerTransform = character.transform;
         m_ParticleSystem.transform.position = position;
         m_ParticleSystem.Play();
+    }
+
+    IEnumerator SwapCooldown(int index) {
+        if (index == 0) {
+            switch1 = false;
+            yield return new WaitForSeconds(5f);
+            switch1 = true;
+        } else if (index == 1) {
+            switch2 = false;
+            yield return new WaitForSeconds(5f);
+            switch2 = true;
+        } else if (index == 2) {
+            switch3 = false;
+            yield return new WaitForSeconds(5f);
+            switch3 = true;
+        }
     }
     
     public void nextRoom(){
