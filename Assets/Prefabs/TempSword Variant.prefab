@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 70bea61c076788947843ea4d210eb2ce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.035
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 70bea61c076788947843ea4d210eb2ce, type: 3}
       propertyPath: m_LocalPosition.y
@@ -76,6 +76,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 70bea61c076788947843ea4d210eb2ce, type: 3}
   m_PrefabInstance: {fileID: 443812489497224704}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &2850298544629428016
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786393575935974225}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 1.85
+  m_Center: {x: 1.98, y: 0.21, z: 0}
 --- !u!65 &4588656343495081085
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -85,10 +98,24 @@ BoxCollider:
   m_GameObject: {fileID: 786393575935974225}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 2.5965035, y: 0.4280395, z: 0.057348542}
+  m_Size: {x: 3.44, y: 0.82, z: 0.51}
   m_Center: {x: 0.52916825, y: 0.16104722, z: 0.0066415183}
+--- !u!136 &8179164366451345234
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786393575935974225}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  m_Radius: 7.45
+  m_Height: 6.67
+  m_Direction: 1
+  m_Center: {x: 2.87, y: 0, z: 0}
 --- !u!114 &3162129813369973727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,3 +131,15 @@ MonoBehaviour:
   weaponName: TempSword
   type: sword
   damage: 10
+--- !u!114 &3628417824434171356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786393575935974225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9b3c84584f81643bde495b270aaaef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -33,5 +33,32 @@ public class Equipment : MonoBehaviour
         currentWeaponInSheath = Instantiate(weapon, weaponSheath.transform);
         Destroy(currentWeaponInHand);
     }
- 
+    
+    public void StartDealDamage()
+    {
+        currentWeaponInHand.GetComponentInChildren<TestBoxCollision>().StartDealDamage();
+    }
+    public void EndDealDamage()
+    {
+        currentWeaponInHand.GetComponentInChildren<TestBoxCollision>().EndDealDamage();
+    }
+
+    public void HeavyDealDamage()
+    {
+        currentWeaponInHand.GetComponentInChildren<TestBoxCollision>().HeavyDealDamage();
+    }
+    public void HeavyEndDealDamage()
+    {
+        currentWeaponInHand.GetComponentInChildren<TestBoxCollision>().HeavyEndDealDamage();
+    }
+
+    public void SuperDealDamage()
+    {
+        currentWeaponInHand.GetComponentInChildren<TestBoxCollision>().SuperDealDamage();
+    }
+    public void SuperEndDealDamage()
+    {
+        currentWeaponInHand.GetComponentInChildren<TestBoxCollision>().SuperEndDealDamage();
+    }
+
 }
