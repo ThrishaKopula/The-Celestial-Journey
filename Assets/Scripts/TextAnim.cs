@@ -43,7 +43,7 @@ public class TextAnim : MonoBehaviour
     {
         if(PauseMenu.gameIsPaused == false)
         {
-            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && isCurrentlyTyping == false)
+            if (Input.GetKeyDown(KeyCode.Space) && isCurrentlyTyping == false)
             {
                 EndCheck();
             }

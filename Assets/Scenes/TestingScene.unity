@@ -487,6 +487,8 @@ MonoBehaviour:
   CharacterList: []
   m_ParticleSystem: {fileID: 0}
   roomList: []
+  healthBar: {fileID: 0}
+  ultBar: {fileID: 0}
 --- !u!4 &88544961
 Transform:
   m_ObjectHideFlags: 0
@@ -2507,8 +2509,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  movementSpeed: 1
   damage: 5
+  movementSpeed: 1
+  lungeSpeed: 0.8
+  lungeHeight: 6
+  minimumDistance: 0
+  maximumDistance: 4
+  timeBetweenAttacks: 3
 --- !u!54 &400137454
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5666,8 +5673,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  movementSpeed: 1
   damage: 5
+  movementSpeed: 1
+  lungeSpeed: 0.8
+  lungeHeight: 6
+  minimumDistance: 0
+  maximumDistance: 4
+  timeBetweenAttacks: 3
 --- !u!54 &922391932
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7745,8 +7757,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  movementSpeed: 1
   damage: 5
+  movementSpeed: 1
+  lungeSpeed: 0.8
+  lungeHeight: 6
+  minimumDistance: 0
+  maximumDistance: 4
+  timeBetweenAttacks: 3
 --- !u!54 &1303763494
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8310,8 +8327,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  movementSpeed: 1
   damage: 5
+  movementSpeed: 1
+  lungeSpeed: 0.8
+  lungeHeight: 6
+  minimumDistance: 0
+  maximumDistance: 4
+  timeBetweenAttacks: 3
 --- !u!54 &1354211082
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12913,6 +12935,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 226469696}
+    - target: {fileID: 1156041242386356122, guid: ed44b7acad817984f8901e2e79214cd4, type: 3}
+      propertyPath: isMagic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156041242386356122, guid: ed44b7acad817984f8901e2e79214cd4, type: 3}
+      propertyPath: lightMagic
+      value: 
+      objectReference: {fileID: 254183901926386586, guid: 80a7b953fc40f1c4aa7393e90da59250, type: 3}
+    - target: {fileID: 1156041242386356125, guid: ed44b7acad817984f8901e2e79214cd4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 434eaac3881c8bd47b32eca167339032, type: 2}
     - target: {fileID: 3960180232910766067, guid: ed44b7acad817984f8901e2e79214cd4, type: 3}
       propertyPath: m_Name
       value: Star Player

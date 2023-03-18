@@ -7,6 +7,7 @@ public class MagicLightAttackState : States
     float timePassed;
     float clipLength;
     float clipSpeed;
+    Quaternion angle;
     bool magicLightAttack;
     bool magicHeavyAttack;
     public GameObject projectilePrefab;
@@ -20,12 +21,13 @@ public class MagicLightAttackState : States
     public override void Enter()
     {
         base.Enter();
- 
+        angle = character.transform.rotation;
+        GameObject.Instantiate(character.lightMagic, character.transform.position + new Vector3(0, 1, 1), angle);
         magicLightAttack = false;
         magicHeavyAttack = false;
         character.animator.applyRootMotion = true;
         timePassed = 0f;
-        character.animator.SetTrigger("MagicLightAttack");
+        character.animator.SetTrigger("ProjectileAttack");
         character.animator.SetFloat("Speed", 0f);
 
     }
@@ -34,7 +36,7 @@ public class MagicLightAttackState : States
     {
         base.HandleInput();
  
-        if (lightAttackAction.triggered)
+        if (magicLightAttackAction.triggered)
         {
             magicLightAttack = true;
         }
@@ -48,23 +50,13 @@ public class MagicLightAttackState : States
     {
         base.LogicUpdate();
 
+       
         timePassed += Time.deltaTime;
         clipLength = character.animator.GetCurrentAnimatorClipInfo(1)[0].clip.length;
         clipSpeed = character.animator.GetCurrentAnimatorStateInfo(1).speed;
-
-        if (timePassed >= (clipLength / clipSpeed)/2){//if half-way through the animation:
-            //spawn projectile:
-            GameObject.Instantiate(projectilePrefab, character.transform.position, character.transform.rotation, character.transform);
-            //this assumes that the projectile has it's own homing, which magic probably will. 
-        }
- 
         if (timePassed <= clipLength / clipSpeed && magicLightAttack)
         {
-            //stateMachine.ChangeState(character.magicLightAttacking);
-        }
-        if (timePassed <= clipLength / clipSpeed && magicHeavyAttack)
-        {
-            //stateMachine.ChangeState(character.magicHeavyAttacking);
+            stateMachine.ChangeState(character.magicLightAttacking);
         }
         if (timePassed >= clipLength / clipSpeed)
         {
@@ -78,5 +70,6 @@ public class MagicLightAttackState : States
         
         base.Exit();
         character.animator.applyRootMotion = false;
+        
     }
 }

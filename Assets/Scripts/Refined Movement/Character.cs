@@ -15,6 +15,9 @@ public class Character : MonoBehaviour
     public float playerSpeed = 5.0f;
     public float gravityMultiplier = 2;
     public float rotationSpeed = 5f;
+    public GameObject lightMagic;
+
+    public bool isMagic;
 
     [Header("Animation Smoother")]
     [Range(0,1)]
@@ -36,6 +39,7 @@ public class Character : MonoBehaviour
 
     public SpecialAttackState specialAttacking;
 
+    public MagicLightAttackState magicLightAttacking;
     public DodgeState dodge;
 
     //Gravity for the character
@@ -86,6 +90,7 @@ public class Character : MonoBehaviour
         lightAttacking = new LightAttackState(this,movementSM);
         heavyAttacking = new HeavyAttackState(this,movementSM);
         specialAttacking = new SpecialAttackState(this,movementSM);
+        magicLightAttacking = new MagicLightAttackState(this,movementSM);
         dodge = new DodgeState(this,movementSM);
         
         movementSM.Initialize(combatting);

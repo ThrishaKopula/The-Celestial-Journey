@@ -20,6 +20,8 @@ public class States
    public InputAction drawWeaponAction;
    public InputAction lightAttackAction;
    public InputAction heavyAttackAction;
+
+   public InputAction magicLightAttackAction;
    public InputAction specialAttackAction;
    //Each State Passes the character class and the base state Machine
    public States(Character _character, StateMachine _stateMachine){
@@ -33,6 +35,7 @@ public class States
         dodgeAction = character.playerInput.actions["Dodge"];
         drawWeaponAction = character.playerInput.actions["Draw Weapon"];
         lightAttackAction = character.playerInput.actions["LightAttack"];
+        magicLightAttackAction = character.playerInput.actions["LightAttack"];
         heavyAttackAction = character.playerInput.actions["HeavyAttack"];
         specialAttackAction = character.playerInput.actions["SpecialAttack"];
 

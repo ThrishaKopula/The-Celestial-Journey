@@ -13,11 +13,15 @@ public class CombatState : States
    bool sheathWeapon;
    bool lightAttackCombo;
 
+   bool magicLightAttackCombo;
+
    bool dodging;
    bool heavyAttack;
 
    bool specialAttack;
   
+   bool isMagic;
+
 
    public CombatState(Character _character, StateMachine _stateMachine) : base(_character,_stateMachine){
         character = _character;
@@ -31,6 +35,7 @@ public class CombatState : States
         sheathWeapon = false;
         isGrounded = false;
         lightAttackCombo = false;
+        magicLightAttackCombo = false;
         heavyAttack = false;
         specialAttack = false;
         isDashing = false;
@@ -42,6 +47,8 @@ public class CombatState : States
         velocity = character.playerVelocity;
         playerSpeed = character.playerSpeed;
         gravityValue = character.gravityValue;
+        isMagic = character.isMagic;
+        
     }
 
     public override void HandleInput()
@@ -67,6 +74,10 @@ public class CombatState : States
         //If Heavy Attack Action triggered Set LightAttack to True;
         if(heavyAttackAction.triggered){
             heavyAttack = true;
+        }
+
+        if(magicLightAttackAction.triggered){
+            magicLightAttackCombo = true;
         }
 
         //If Heavy Attack Action triggered Set LightAttack to True;
@@ -105,12 +116,17 @@ public class CombatState : States
             stateMachine.ChangeState(character.idle);
         } 
 
-        if(lightAttackCombo){
+        if(lightAttackCombo && !isMagic){
             character.animator.SetTrigger("LightAttack");
             stateMachine.ChangeState(character.lightAttacking);
         } 
+        
+        if(magicLightAttackCombo && isMagic){
+            character.animator.SetTrigger("ProjectileAttack");
+            stateMachine.ChangeState(character.magicLightAttacking);
+        } 
 
-         if(heavyAttack){
+        if(heavyAttack){
             character.animator.SetTrigger("HeavyAttack");
             stateMachine.ChangeState(character.heavyAttacking);
         } 
