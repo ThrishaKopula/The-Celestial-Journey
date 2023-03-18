@@ -18,6 +18,7 @@ public class Weapon : MonoBehaviour
             Debug.Log(gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName]);
             if (enemy.Damage(damage)){
                 Destroy(enemy.gameObject);
+                gameHandler.enemiesDefeated++;
             }
         }
         else if (rangedEnemy != null){
@@ -26,8 +27,8 @@ public class Weapon : MonoBehaviour
             Debug.Log(gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName]);
             if (rangedEnemy.Damage(damage)){
                 Destroy(rangedEnemy.gameObject);
+                gameHandler.enemiesDefeated++;
             }
         }
-        
     }
 }

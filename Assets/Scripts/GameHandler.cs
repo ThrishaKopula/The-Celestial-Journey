@@ -33,6 +33,10 @@ public class GameHandler : MonoBehaviour
     private float lerpSpeed = 0.25f;
     private float time;
 
+    public int enemiesToWin = 5;
+    public int enemiesDefeated = 0;
+    public GameObject levelChange;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +90,13 @@ public class GameHandler : MonoBehaviour
             Swap(1);
             //NextCharacter();
         }
+
+        if(enemiesDefeated == enemiesToWin)
+        {
+            levelChange.GetComponent<LevelChanger>().FadeToLevel(2);
+        }
+        CheckGameLose();
+
     }
     //Health interaction functions
     public float GetHealth(){
@@ -199,5 +210,21 @@ public class GameHandler : MonoBehaviour
         float startHealth = ultBar.value;
         time += Time.deltaTime * lerpSpeed;
         ultBar.value = Mathf.Lerp(startHealth, targetHealth, time);
+    }
+
+    public void CheckGameLose()
+    {
+        int count = 0;
+        foreach (GameObject characterloop in CharacterList)
+        {
+            if(CharacterHealths[characterloop.GetComponent<Character>().characterName] <= 0)
+            {
+                count++;
+            }
+        }
+        if(count == 2)
+        {
+            levelChange.GetComponent<LevelChanger>().FadeToLevel(3);
+        }
     }
 }
