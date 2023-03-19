@@ -19,6 +19,8 @@ public class Character : MonoBehaviour
 
     public bool isMagic;
 
+    public bool isDead;
+
     [Header("Animation Smoother")]
     [Range(0,1)]
     public float speedDampTime = 0.1f;
@@ -40,7 +42,11 @@ public class Character : MonoBehaviour
     public SpecialAttackState specialAttacking;
 
     public MagicLightAttackState magicLightAttacking;
+
+    public MagicSpecialAttackState magicSpecialAttacking;
     public DodgeState dodge;
+
+    public DeadState dead;
 
     //Gravity for the character
     [HideInInspector]
@@ -91,7 +97,9 @@ public class Character : MonoBehaviour
         heavyAttacking = new HeavyAttackState(this,movementSM);
         specialAttacking = new SpecialAttackState(this,movementSM);
         magicLightAttacking = new MagicLightAttackState(this,movementSM);
+        magicSpecialAttacking = new MagicSpecialAttackState(this,movementSM);
         dodge = new DodgeState(this,movementSM);
+        dead = new DeadState(this,movementSM);
         
         movementSM.Initialize(combatting);
 

@@ -144,6 +144,7 @@ public class Enemy : MonoBehaviour
         Character character = other.GetComponent<Character>();
         if (character != null){
             //do damage
+            print("Hit the player");
             gameHandler.Damage(damage);
             //do a kickback force to get them out of the collider, but could probably use a delay on another hit
             Vector3 direction = this.transform.position - character.gameObject.transform.position;

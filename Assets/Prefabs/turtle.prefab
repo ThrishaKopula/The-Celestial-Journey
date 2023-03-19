@@ -95,9 +95,10 @@ GameObject:
   - component: {fileID: 2750694156060564309}
   - component: {fileID: 2750694156060564310}
   - component: {fileID: 2750694156060564311}
+  - component: {fileID: 4878424860292818560}
   m_Layer: 0
   m_Name: turtle
-  m_TagString: Untagged
+  m_TagString: enemy_hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +117,7 @@ Transform:
   m_Children:
   - {fileID: 3470017308498800454}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2750694156060564309
 Rigidbody:
@@ -162,11 +163,24 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2750694156060564313}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.226861, y: 1.0441127, z: 1.4847431}
   m_Center: {x: 0.01736617, y: 0.5552709, z: 0.1721487}
+--- !u!65 &4878424860292818560
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750694156060564313}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4281844590215394812
 GameObject:
   m_ObjectHideFlags: 0

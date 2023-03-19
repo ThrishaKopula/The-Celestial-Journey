@@ -22,6 +22,7 @@ public class States
    public InputAction heavyAttackAction;
 
    public InputAction magicLightAttackAction;
+   public InputAction magicSpecialAttackAction;
    public InputAction specialAttackAction;
    //Each State Passes the character class and the base state Machine
    public States(Character _character, StateMachine _stateMachine){
@@ -38,6 +39,7 @@ public class States
         magicLightAttackAction = character.playerInput.actions["LightAttack"];
         heavyAttackAction = character.playerInput.actions["HeavyAttack"];
         specialAttackAction = character.playerInput.actions["SpecialAttack"];
+        magicSpecialAttackAction = character.playerInput.actions["SpecialAttack"];
 
    }
 

@@ -33,6 +33,7 @@ public class GameHandler : MonoBehaviour
     private float lerpSpeed = 0.25f;
     private float time;
 
+    private Animator anim;
     public int enemiesToWin = 5;
     public int enemiesDefeated = 0;
     public GameObject levelChange;
@@ -123,13 +124,19 @@ public class GameHandler : MonoBehaviour
         //Debug.Log("Enemy did damage!");
         if (CharacterHealths[character.GetComponent<Character>().characterName] < 0){
             Debug.Log("Character " + character.GetComponent<Character>().characterName + " died!");
+            character.GetComponent<Character>().isDead = true;
             //character died / incapacitated
             //swap to another character that isn't dead?
+            
+            //After 5 seconds passed or smth
+            //if CharacterList
         }
+        character.GetComponent<Animator>().SetTrigger("Damage");
     }
     public void Damage(int damage, string charName){
         CharacterHealths[charName] -= damage;
         if (CharacterHealths[charName] < 0){
+            character.GetComponent<Animator>().SetTrigger("isDead");
             //character died / incapacitated
         }
     }
@@ -164,7 +171,9 @@ public class GameHandler : MonoBehaviour
     public void Swap(int index) {
         if (index < 0 || index > CharacterList.Count - 1) return; // bounds check
         if (whichCharacter == index) return; // swapping to the same character
+        if (CharacterHealths[CharacterList[index].GetComponent<Character>().characterName] <= 0)return;//If the character to swap is 0
         whichCharacter = index;
+        
         //keep track of where the player and rotation currently is
         Vector3 position = character.transform.position;
         Quaternion rotation = character.transform.rotation;
@@ -173,6 +182,16 @@ public class GameHandler : MonoBehaviour
         cameraMovement.PlayerTransform = character.transform;
         m_ParticleSystem.transform.position = position;
         m_ParticleSystem.Play();
+    }
+
+    public void ForceSwap(){
+        for (int index = 0; index < CharacterList.Count; index++){
+            if (CharacterHealths[CharacterList[index].GetComponent<Character>().characterName] > 0){
+                Swap(index);
+                break;
+            }
+
+        }
     }
     
     public void nextRoom(){

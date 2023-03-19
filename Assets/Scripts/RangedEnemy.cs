@@ -147,8 +147,10 @@ public class RangedEnemy : MonoBehaviour
         //instead of destroying the enemy gameobject here, i'm returning
         // a boolean for whether or not it has dies. this is so if we want
         // to have a kill count or something else we can do that
+        
         if (health <= 0 ) {
             return true;
+            
         }
         else return false;
     }

@@ -61,6 +61,8 @@ public class LightAttackState : States
         {
             stateMachine.ChangeState(character.combatting);
             character.animator.SetTrigger("Move");
+            character.animator.ResetTrigger("LightAttack");
+            character.animator.ResetTrigger("HeavyAttack");
         }
  
     }
