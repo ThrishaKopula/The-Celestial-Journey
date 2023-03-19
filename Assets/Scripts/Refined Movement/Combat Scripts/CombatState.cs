@@ -27,7 +27,7 @@ public class CombatState : States
 
    bool isDead;
   
-
+   GameHandler gamehandler;
    public CombatState(Character _character, StateMachine _stateMachine) : base(_character,_stateMachine){
         character = _character;
         stateMachine = _stateMachine;
@@ -90,18 +90,10 @@ public class CombatState : States
         }
 
         
-        if(magicSpecialAttackAction.triggered){
-            magicSpecialAttack = true;
-        }
-
         //If Heavy Attack Action triggered Set LightAttack to True;
         if(specialAttackAction.triggered){
-            GameHandler gameHandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
-            if (gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName] >= character.maxUlt)
-            {
+           
                 specialAttack = true;
-                
-            }
             
         }
 
@@ -152,13 +144,21 @@ public class CombatState : States
         } 
 
          if(specialAttack && !isMagic){
-            character.animator.SetTrigger("SpecialAttack");
-            stateMachine.ChangeState(character.specialAttacking);
+            gameHandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
+            if (gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName] >= character.maxUlt)
+            {
+                character.animator.SetTrigger("SpecialAttack");
+                stateMachine.ChangeState(character.specialAttacking);
+            }
         } 
 
         if(specialAttack && isMagic){
+            gameHandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
+            if (gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName] >= character.maxUlt)
+            {
             character.animator.SetTrigger("MagicSpecialAttack");
             stateMachine.ChangeState(character.magicSpecialAttacking);
+            }
         } 
     }
 

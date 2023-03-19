@@ -127,6 +127,9 @@ public class GameHandler : MonoBehaviour
             character.GetComponent<Character>().isDead = true;
             //character died / incapacitated
             //swap to another character that isn't dead?
+            
+            //After 5 seconds passed or smth
+            //if CharacterList
         }
         character.GetComponent<Animator>().SetTrigger("Damage");
     }
@@ -168,7 +171,9 @@ public class GameHandler : MonoBehaviour
     public void Swap(int index) {
         if (index < 0 || index > CharacterList.Count - 1) return; // bounds check
         if (whichCharacter == index) return; // swapping to the same character
+        if (CharacterHealths[CharacterList[index].GetComponent<Character>().characterName] <= 0)return;//If the character to swap is 0
         whichCharacter = index;
+        
         //keep track of where the player and rotation currently is
         Vector3 position = character.transform.position;
         Quaternion rotation = character.transform.rotation;
@@ -177,6 +182,16 @@ public class GameHandler : MonoBehaviour
         cameraMovement.PlayerTransform = character.transform;
         m_ParticleSystem.transform.position = position;
         m_ParticleSystem.Play();
+    }
+
+    public void ForceSwap(){
+        for (int index = 0; index < CharacterList.Count; index++){
+            if (CharacterHealths[CharacterList[index].GetComponent<Character>().characterName] > 0){
+                Swap(index);
+                break;
+            }
+
+        }
     }
     
     public void nextRoom(){

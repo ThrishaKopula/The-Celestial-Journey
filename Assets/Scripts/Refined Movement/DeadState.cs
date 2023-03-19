@@ -36,9 +36,10 @@ public class DeadState: States
         clipSpeed = character.animator.GetCurrentAnimatorStateInfo(1).speed;
         
         timePassed += Time.deltaTime;
-        if (timePassed >= clipLength / clipSpeed)
+        if (timePassed >= clipLength * 1.5 / clipSpeed)
         {
-
+            GameHandler gameHandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
+            gameHandler.ForceSwap();
             
         }
  
