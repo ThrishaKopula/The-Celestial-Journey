@@ -19,9 +19,14 @@ public class CombatState : States
    bool heavyAttack;
 
    bool specialAttack;
+
+   bool magicSpecialAttack;
+
   
    bool isMagic;
 
+   bool isDead;
+  
 
    public CombatState(Character _character, StateMachine _stateMachine) : base(_character,_stateMachine){
         character = _character;
@@ -38,8 +43,11 @@ public class CombatState : States
         magicLightAttackCombo = false;
         heavyAttack = false;
         specialAttack = false;
+        magicSpecialAttack = false;
         isDashing = false;
+       
         dodging = false;
+        
         input = Vector2.zero;
         currentVelocity = Vector3.zero;
         gravityVelocity.y = 0;
@@ -48,12 +56,13 @@ public class CombatState : States
         playerSpeed = character.playerSpeed;
         gravityValue = character.gravityValue;
         isMagic = character.isMagic;
-        
+        isDead = character.isDead;
     }
 
     public override void HandleInput()
     {
         base.HandleInput();
+        
 
         if(drawWeaponAction.triggered){
             sheathWeapon = true;
@@ -80,12 +89,18 @@ public class CombatState : States
             magicLightAttackCombo = true;
         }
 
+        
+        if(magicSpecialAttackAction.triggered){
+            magicSpecialAttack = true;
+        }
+
         //If Heavy Attack Action triggered Set LightAttack to True;
         if(specialAttackAction.triggered){
             GameHandler gameHandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
             if (gameHandler.CharacterUlts[gameHandler.character.GetComponent<Character>().characterName] >= character.maxUlt)
             {
                 specialAttack = true;
+                
             }
             
         }
@@ -103,9 +118,14 @@ public class CombatState : States
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
+        isDead = character.isDead;
         character.animator.SetFloat("Speed",input.magnitude, character.speedDampTime, Time.deltaTime);   
-
+        GameHandler gameHandler = GameObject.Find("GameHandler").GetComponent<GameHandler>();
+        
+        if(isDead){
+            character.animator.SetTrigger("isDead");
+            stateMachine.ChangeState(character.dead);
+        }
         if(dodging){
             character.animator.SetTrigger("Dodge");
             stateMachine.ChangeState(character.dodge);
@@ -131,9 +151,14 @@ public class CombatState : States
             stateMachine.ChangeState(character.heavyAttacking);
         } 
 
-         if(specialAttack){
+         if(specialAttack && !isMagic){
             character.animator.SetTrigger("SpecialAttack");
             stateMachine.ChangeState(character.specialAttacking);
+        } 
+
+        if(specialAttack && isMagic){
+            character.animator.SetTrigger("MagicSpecialAttack");
+            stateMachine.ChangeState(character.magicSpecialAttacking);
         } 
     }
 

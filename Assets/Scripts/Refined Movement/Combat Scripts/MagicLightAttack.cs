@@ -61,6 +61,7 @@ public class MagicLightAttackState : States
         if (timePassed >= clipLength / clipSpeed)
         {
             stateMachine.ChangeState(character.combatting);
+            character.animator.ResetTrigger("ProjectileAttack");
             character.animator.SetTrigger("Move");
         }
  
@@ -70,6 +71,6 @@ public class MagicLightAttackState : States
         
         base.Exit();
         character.animator.applyRootMotion = false;
-        
+
     }
 }
